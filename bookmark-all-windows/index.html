@@ -1,607 +1,214 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="baw">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bookmark All Windows - Save All Tabs with One Click</title>
   <meta name="description" content="A browser extension that saves all tabs from all open windows into organized bookmark folders with a single click.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    :root {
-      --bg-primary: #0d1117;
-      --bg-secondary: #161b22;
-      --bg-card: #21262d;
-      --accent: #f97316;
-      --accent-secondary: #fb923c;
-      --accent-glow: rgba(249, 115, 22, 0.3);
-      --text-primary: #f0f6fc;
-      --text-secondary: #8b949e;
-      --text-muted: #6e7681;
-      --border: #30363d;
-      --success: #3fb950;
-      --gradient-1: linear-gradient(135deg, #f97316 0%, #fb923c 100%);
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Space Grotesk', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-
-    .gradient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: 
-        radial-gradient(ellipse 80% 50% at 20% -20%, rgba(249, 115, 22, 0.12) 0%, transparent 50%),
-        radial-gradient(ellipse 60% 40% at 80% 100%, rgba(251, 146, 60, 0.08) 0%, transparent 50%);
-      pointer-events: none;
-    }
-
-    .container {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 0 24px;
-      position: relative;
-      z-index: 1;
-    }
-
-    nav {
-      padding: 24px 0;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-primary);
-    }
-
-    .nav-brand-icon {
-      font-size: 1.8rem;
-    }
-
-    .nav-brand-text {
-      font-size: 1.2rem;
-      font-weight: 600;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 24px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.95rem;
-      transition: color 0.2s;
-    }
-
-    .nav-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .hero {
-      padding: 80px 0 60px;
-      text-align: center;
-    }
-
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 100px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      margin-bottom: 24px;
-    }
-
-    .hero h1 {
-      font-size: clamp(2.2rem, 5vw, 3.5rem);
-      font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 20px;
-    }
-
-    .hero h1 .gradient {
-      background: var(--gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
-      font-size: 1.15rem;
-      color: var(--text-secondary);
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.7;
-    }
-
-    .hero-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 60px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      border-radius: 12px;
-      font-size: 1rem;
-      font-weight: 500;
-      text-decoration: none;
-      transition: all 0.3s;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--gradient-1);
-      color: white;
-      box-shadow: 0 4px 20px var(--accent-glow);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 30px var(--accent-glow);
-    }
-
-    .btn-secondary {
-      background: var(--bg-card);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      background: var(--bg-secondary);
-      border-color: var(--accent);
-    }
-
-    .hero-image {
-      max-width: 500px;
-      margin: 0 auto;
-      border-radius: 16px;
-      overflow: hidden;
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4), 0 0 60px var(--accent-glow);
-      border: 1px solid var(--border);
-    }
-
-    .hero-image img {
-      width: 100%;
-      display: block;
-    }
-
-    .features {
-      padding: 80px 0;
-    }
-
-    .section-header {
-      text-align: center;
-      margin-bottom: 64px;
-    }
-
-    .section-header h2 {
-      font-size: 2.2rem;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .section-header p {
-      color: var(--text-secondary);
-      font-size: 1.1rem;
-    }
-
-    .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-    }
-
-    .feature-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      padding: 28px;
-      transition: all 0.3s;
-    }
-
-    .feature-card:hover {
-      border-color: var(--accent);
-      transform: translateY(-2px);
-    }
-
-    .feature-icon {
-      font-size: 2rem;
-      margin-bottom: 16px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .feature-card p {
-      color: var(--text-secondary);
-      line-height: 1.6;
-      font-size: 0.95rem;
-    }
-
-    .how-it-works {
-      padding: 80px 0;
-    }
-
-    .steps {
-      display: flex;
-      justify-content: center;
-      gap: 24px;
-      flex-wrap: wrap;
-    }
-
-    .step {
-      text-align: center;
-      max-width: 200px;
-    }
-
-    .step-icon {
-      width: 80px;
-      height: 80px;
-      background: var(--bg-card);
-      border: 2px solid var(--border);
-      border-radius: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 2rem;
-      margin: 0 auto 16px;
-    }
-
-    .step-icon.highlight {
-      border-color: var(--accent);
-      box-shadow: 0 0 30px var(--accent-glow);
-    }
-
-    .step h3 {
-      font-size: 1rem;
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .step-arrow {
-      display: flex;
-      align-items: center;
-      color: var(--accent);
-      font-size: 1.5rem;
-      padding-top: 20px;
-    }
-
-    .compatibility {
-      padding: 60px 0;
-      text-align: center;
-    }
-
-    .browsers {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      flex-wrap: wrap;
-      margin-top: 32px;
-    }
-
-    .browser {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-    }
-
-    .browser-icon {
-      font-size: 2.5rem;
-    }
-
-    .legal {
-      padding: 60px 0;
-      border-top: 1px solid var(--border);
-    }
-
-    .legal-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 24px;
-    }
-
-    .legal-card {
-      background: var(--bg-secondary);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 24px;
-    }
-
-    .legal-card h3 {
-      font-size: 1.1rem;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .legal-card p {
-      color: var(--text-secondary);
-      font-size: 0.9rem;
-      line-height: 1.6;
-      margin-bottom: 16px;
-    }
-
-    .legal-card a {
-      color: var(--accent);
-      text-decoration: none;
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    .legal-card a:hover {
-      text-decoration: underline;
-    }
-
-    footer {
-      padding: 48px 0;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-
-    .footer-links {
-      display: flex;
-      justify-content: center;
-      gap: 32px;
-      margin-bottom: 24px;
-      flex-wrap: wrap;
-    }
-
-    .footer-links a {
-      color: var(--text-secondary);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-
-    .footer-links a:hover {
-      color: var(--text-primary);
-    }
-
-    .footer-copy {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none;
-      }
-
-      .hero {
-        padding: 60px 0 40px;
-      }
-
-      .step-arrow {
-        display: none;
-      }
-
-      .steps {
-        flex-direction: column;
-        align-items: center;
-      }
-    }
-  </style>
+  <script src="../theme.js"></script>
 </head>
-<body>
-  <div class="gradient-bg"></div>
+<body class="bg-surface-base text-slate-100 min-h-screen overflow-x-hidden">
 
-  <div class="container">
-    <nav>
-      <a href="/" class="nav-brand">
-        <span class="nav-brand-icon">📚</span>
-        <span class="nav-brand-text">Bookmark All Windows</span>
+  <div class="ambient-glow fixed inset-0 pointer-events-none"></div>
+
+  <div class="max-w-[1100px] mx-auto px-6 relative z-10">
+
+    <nav class="py-6 flex justify-between items-center">
+      <a href="/" class="flex items-center gap-3 no-underline text-slate-100">
+        <span class="text-[1.8rem]">📚</span>
+        <span class="text-xl font-semibold">Bookmark All Windows</span>
       </a>
-      <ul class="nav-links">
-        <li><a href="#features">Features</a></li>
-        <li><a href="#how-it-works">How It Works</a></li>
-        <li><a href="https://github.com/onurcakmakeng/bookmark-all-windows" target="_blank">GitHub</a></li>
+      <ul class="hidden md:flex gap-6 list-none">
+        <li><a href="#features" class="text-slate-400 text-[0.95rem] hover:text-slate-100 transition-colors">Features</a></li>
+        <li><a href="#how-it-works" class="text-slate-400 text-[0.95rem] hover:text-slate-100 transition-colors">How It Works</a></li>
+        <li><a href="#" id="nav-github" class="text-slate-400 text-[0.95rem] hover:text-slate-100 transition-colors">GitHub</a></li>
       </ul>
     </nav>
 
-    <section class="hero">
-      <div class="hero-badge">
+    <section class="pt-20 pb-16 text-center">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-surface-card border border-surface-border rounded-full text-[0.85rem] text-slate-400 mb-6">
         🎉 Now available for Chrome, Brave, Edge & more
       </div>
-      <h1>Save <span class="gradient">all your tabs</span><br>with one click</h1>
-      <p>Stop losing your browsing sessions. Bookmark all tabs from all open windows into organized folders instantly.</p>
-      <div class="hero-buttons">
-        <a href="https://chrome.google.com/webstore" target="_blank" class="btn btn-primary">
+      <h1 class="text-[clamp(2.2rem,5vw,3.5rem)] font-bold leading-tight mb-5">
+        Save <span class="gradient-text">all your tabs</span><br>with one click
+      </h1>
+      <p class="text-lg text-slate-400 max-w-[600px] mx-auto mb-10 leading-relaxed">
+        Stop losing your browsing sessions. Bookmark all tabs from all open windows into organized folders instantly.
+      </p>
+      <div class="flex gap-4 justify-center flex-wrap mb-16">
+        <a href="https://chrome.google.com/webstore" target="_blank" class="gradient-bg inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium text-white shadow-[0_4px_20px_rgba(249,115,22,0.3)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(249,115,22,0.4)] transition-all">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.45 7.09l.002.001h-.002l-3.952 6.848a12.014 12.014 0 0 0 9.229-9.006zM12 16.364a4.364 4.364 0 1 1 0-8.728 4.364 4.364 0 0 1 0 8.728z"/>
           </svg>
           Add to Chrome
         </a>
-        <a href="https://github.com/onurcakmakeng/bookmark-all-windows" target="_blank" class="btn btn-secondary">
+        <a href="#" id="hero-github" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium bg-surface-card border border-surface-border text-slate-100 hover:bg-surface-raised hover:border-accent transition-all">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
             <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
           </svg>
           View Source
         </a>
       </div>
-      <div class="hero-image">
-        <img src="https://github.com/user-attachments/assets/9e19fb1d-8114-47b7-9557-493b5a685f58" alt="Bookmark All Windows Extension Screenshot">
+      <div class="max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-surface-border hero-image-glow">
+        <img src="https://github.com/user-attachments/assets/9e19fb1d-8114-47b7-9557-493b5a685f58" alt="Bookmark All Windows Extension Screenshot" class="w-full block">
       </div>
     </section>
 
-    <section class="features" id="features">
-      <div class="section-header">
-        <h2>Features</h2>
-        <p>Everything you need to manage your browsing sessions</p>
+    <section class="py-20" id="features">
+      <div class="text-center mb-16">
+        <h2 class="text-[2.2rem] font-bold mb-4">Features</h2>
+        <p class="text-slate-400 text-lg">Everything you need to manage your browsing sessions</p>
       </div>
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">📁</div>
-          <h3>Organized Folders</h3>
-          <p>Each window gets its own folder with all tabs neatly organized inside.</p>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(300px,1fr))] gap-6">
+        <div class="bg-surface-raised border border-surface-border rounded-2xl p-7 hover:border-accent hover:-translate-y-0.5 transition-all">
+          <div class="text-[2rem] mb-4">📁</div>
+          <h3 class="text-xl font-semibold mb-2.5">Organized Folders</h3>
+          <p class="text-slate-400 leading-relaxed text-[0.95rem]">Each window gets its own folder with all tabs neatly organized inside.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">⏱️</div>
-          <h3>Timestamped</h3>
-          <p>Automatic timestamps make it easy to find and identify your saved sessions.</p>
+        <div class="bg-surface-raised border border-surface-border rounded-2xl p-7 hover:border-accent hover:-translate-y-0.5 transition-all">
+          <div class="text-[2rem] mb-4">⏱️</div>
+          <h3 class="text-xl font-semibold mb-2.5">Timestamped</h3>
+          <p class="text-slate-400 leading-relaxed text-[0.95rem]">Automatic timestamps make it easy to find and identify your saved sessions.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🏷️</div>
-          <h3>Custom Prefix</h3>
-          <p>Name your sessions with custom folder prefixes for better organization.</p>
+        <div class="bg-surface-raised border border-surface-border rounded-2xl p-7 hover:border-accent hover:-translate-y-0.5 transition-all">
+          <div class="text-[2rem] mb-4">🏷️</div>
+          <h3 class="text-xl font-semibold mb-2.5">Custom Prefix</h3>
+          <p class="text-slate-400 leading-relaxed text-[0.95rem]">Name your sessions with custom folder prefixes for better organization.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">📊</div>
-          <h3>Live Stats</h3>
-          <p>See window and tab counts before saving so you know exactly what you're bookmarking.</p>
+        <div class="bg-surface-raised border border-surface-border rounded-2xl p-7 hover:border-accent hover:-translate-y-0.5 transition-all">
+          <div class="text-[2rem] mb-4">📊</div>
+          <h3 class="text-xl font-semibold mb-2.5">Live Stats</h3>
+          <p class="text-slate-400 leading-relaxed text-[0.95rem]">See window and tab counts before saving so you know exactly what you're bookmarking.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">🚫</div>
-          <h3>Smart Filtering</h3>
-          <p>Automatically skips internal browser pages like chrome:// and brave://.</p>
+        <div class="bg-surface-raised border border-surface-border rounded-2xl p-7 hover:border-accent hover:-translate-y-0.5 transition-all">
+          <div class="text-[2rem] mb-4">🚫</div>
+          <h3 class="text-xl font-semibold mb-2.5">Smart Filtering</h3>
+          <p class="text-slate-400 leading-relaxed text-[0.95rem]">Automatically skips internal browser pages like chrome:// and brave://.</p>
         </div>
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <h3>Lightning Fast</h3>
-          <p>Saves hundreds of tabs in seconds. No waiting, no lag.</p>
-        </div>
-      </div>
-    </section>
-
-    <section class="how-it-works" id="how-it-works">
-      <div class="section-header">
-        <h2>How It Works</h2>
-        <p>Three simple steps to save your entire browsing session</p>
-      </div>
-      <div class="steps">
-        <div class="step">
-          <div class="step-icon">🪟</div>
-          <h3>Multiple Windows</h3>
-          <p>Open as many windows and tabs as you need</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-icon highlight">📚</div>
-          <h3>One Click</h3>
-          <p>Click the extension button</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-icon">📁</div>
-          <h3>Organized</h3>
-          <p>All tabs saved into folders</p>
-        </div>
-        <div class="step-arrow">→</div>
-        <div class="step">
-          <div class="step-icon">✅</div>
-          <h3>Done!</h3>
-          <p>Session saved forever</p>
+        <div class="bg-surface-raised border border-surface-border rounded-2xl p-7 hover:border-accent hover:-translate-y-0.5 transition-all">
+          <div class="text-[2rem] mb-4">⚡</div>
+          <h3 class="text-xl font-semibold mb-2.5">Lightning Fast</h3>
+          <p class="text-slate-400 leading-relaxed text-[0.95rem]">Saves hundreds of tabs in seconds. No waiting, no lag.</p>
         </div>
       </div>
     </section>
 
-    <section class="compatibility">
-      <div class="section-header">
-        <h2>Works Everywhere</h2>
-        <p>Compatible with all Chromium-based browsers</p>
+    <section class="py-20" id="how-it-works">
+      <div class="text-center mb-16">
+        <h2 class="text-[2.2rem] font-bold mb-4">How It Works</h2>
+        <p class="text-slate-400 text-lg">Three simple steps to save your entire browsing session</p>
       </div>
-      <div class="browsers">
-        <div class="browser">
-          <span class="browser-icon">🦁</span>
+      <div class="flex justify-center gap-6 flex-wrap">
+        <div class="text-center max-w-[200px]">
+          <div class="w-20 h-20 bg-surface-card border-2 border-surface-border rounded-2xl flex items-center justify-center text-[2rem] mx-auto mb-4">🪟</div>
+          <h3 class="text-base font-semibold mb-2">Multiple Windows</h3>
+          <p class="text-slate-400 text-sm">Open as many windows and tabs as you need</p>
+        </div>
+        <div class="hidden md:flex items-center text-accent text-2xl pt-5">→</div>
+        <div class="text-center max-w-[200px]">
+          <div class="w-20 h-20 bg-surface-card border-2 rounded-2xl flex items-center justify-center text-[2rem] mx-auto mb-4 step-highlight">📚</div>
+          <h3 class="text-base font-semibold mb-2">One Click</h3>
+          <p class="text-slate-400 text-sm">Click the extension button</p>
+        </div>
+        <div class="hidden md:flex items-center text-accent text-2xl pt-5">→</div>
+        <div class="text-center max-w-[200px]">
+          <div class="w-20 h-20 bg-surface-card border-2 border-surface-border rounded-2xl flex items-center justify-center text-[2rem] mx-auto mb-4">📁</div>
+          <h3 class="text-base font-semibold mb-2">Organized</h3>
+          <p class="text-slate-400 text-sm">All tabs saved into folders</p>
+        </div>
+        <div class="hidden md:flex items-center text-accent text-2xl pt-5">→</div>
+        <div class="text-center max-w-[200px]">
+          <div class="w-20 h-20 bg-surface-card border-2 border-surface-border rounded-2xl flex items-center justify-center text-[2rem] mx-auto mb-4">✅</div>
+          <h3 class="text-base font-semibold mb-2">Done!</h3>
+          <p class="text-slate-400 text-sm">Session saved forever</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 text-center">
+      <div class="text-center mb-8">
+        <h2 class="text-[2.2rem] font-bold mb-4">Works Everywhere</h2>
+        <p class="text-slate-400 text-lg">Compatible with all Chromium-based browsers</p>
+      </div>
+      <div class="flex justify-center gap-8 flex-wrap mt-8">
+        <div class="flex flex-col items-center gap-2 text-slate-400 text-sm">
+          <span class="text-[2.5rem]">🦁</span>
           <span>Brave</span>
         </div>
-        <div class="browser">
-          <span class="browser-icon">🌐</span>
+        <div class="flex flex-col items-center gap-2 text-slate-400 text-sm">
+          <span class="text-[2.5rem]">🌐</span>
           <span>Chrome</span>
         </div>
-        <div class="browser">
-          <span class="browser-icon">📘</span>
+        <div class="flex flex-col items-center gap-2 text-slate-400 text-sm">
+          <span class="text-[2.5rem]">📘</span>
           <span>Edge</span>
         </div>
-        <div class="browser">
-          <span class="browser-icon">🎭</span>
+        <div class="flex flex-col items-center gap-2 text-slate-400 text-sm">
+          <span class="text-[2.5rem]">🎭</span>
           <span>Opera</span>
         </div>
-        <div class="browser">
-          <span class="browser-icon">🔴</span>
+        <div class="flex flex-col items-center gap-2 text-slate-400 text-sm">
+          <span class="text-[2.5rem]">🔴</span>
           <span>Vivaldi</span>
         </div>
       </div>
     </section>
 
-    <section class="legal" id="legal">
-      <div class="section-header">
-        <h2>Legal</h2>
+    <section class="py-16 border-t border-surface-border" id="legal">
+      <div class="text-center mb-16">
+        <h2 class="text-[2.2rem] font-bold">Legal</h2>
       </div>
-      <div class="legal-grid">
-        <div class="legal-card">
-          <h3>📜 Terms of Use</h3>
-          <p>By using this extension, you agree to our terms of service including our disclaimer of liability.</p>
-          <a href="terms.html">Read Terms of Use →</a>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(250px,1fr))] gap-6">
+        <div class="bg-surface-raised border border-surface-border rounded-xl p-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">📜 Terms of Use</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">By using this extension, you agree to our terms of service including our disclaimer of liability.</p>
+          <a href="terms.html" class="text-accent font-medium text-sm hover:underline">Read Terms of Use →</a>
         </div>
-        <div class="legal-card">
-          <h3>🔒 Privacy Policy</h3>
-          <p>We don't collect any data. The extension works entirely offline within your browser.</p>
-          <a href="privacy.html">Read Privacy Policy →</a>
+        <div class="bg-surface-raised border border-surface-border rounded-xl p-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">🔒 Privacy Policy</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">We don't collect any data. The extension works entirely offline within your browser.</p>
+          <a href="privacy.html" class="text-accent font-medium text-sm hover:underline">Read Privacy Policy →</a>
         </div>
-        <div class="legal-card">
-          <h3>⚖️ License</h3>
-          <p>This project is open source and licensed under AGPL-3.0.</p>
-          <a href="https://github.com/onurcakmakeng/bookmark-all-windows/blob/main/LICENSE" target="_blank">View License →</a>
+        <div class="bg-surface-raised border border-surface-border rounded-xl p-6">
+          <h3 class="text-lg font-semibold mb-3 flex items-center gap-2">⚖️ License</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-4">This project is open source and licensed under AGPL-3.0.</p>
+          <a href="#" id="license-link" class="text-accent font-medium text-sm hover:underline">View License →</a>
         </div>
       </div>
     </section>
 
-    <footer>
-      <div class="footer-links">
-        <a href="/">Home</a>
-        <a href="https://github.com/onurcakmakeng/bookmark-all-windows" target="_blank">GitHub</a>
-        <a href="terms.html">Terms</a>
-        <a href="privacy.html">Privacy</a>
+    <footer class="py-12 border-t border-surface-border text-center">
+      <div class="flex justify-center gap-8 mb-6 flex-wrap">
+        <a href="/" class="text-slate-400 hover:text-slate-100 transition-colors">Home</a>
+        <a href="#" id="footer-github" class="text-slate-400 hover:text-slate-100 transition-colors">GitHub</a>
+        <a href="terms.html" class="text-slate-400 hover:text-slate-100 transition-colors">Terms</a>
+        <a href="privacy.html" class="text-slate-400 hover:text-slate-100 transition-colors">Privacy</a>
       </div>
-      <p class="footer-copy">© 2026 Onur Çakmak. All rights reserved.</p>
+      <p class="text-slate-500 text-[0.9rem]" id="footer-copy"></p>
     </footer>
+
   </div>
+
+  <script src="../config.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const config = window.SITE_CONFIG;
+      const baw = config.projects.bookmarkAllWindows;
+
+      document.getElementById('nav-github').href = baw.repoUrl;
+      document.getElementById('nav-github').target = '_blank';
+
+      document.getElementById('hero-github').href = baw.repoUrl;
+      document.getElementById('hero-github').target = '_blank';
+
+      document.getElementById('license-link').href = baw.licenseUrl;
+      document.getElementById('license-link').target = '_blank';
+
+      document.getElementById('footer-github').href = baw.repoUrl;
+      document.getElementById('footer-github').target = '_blank';
+
+      document.getElementById('footer-copy').textContent = config.author.copyright;
+    });
+  </script>
 </body>
 </html>
-
