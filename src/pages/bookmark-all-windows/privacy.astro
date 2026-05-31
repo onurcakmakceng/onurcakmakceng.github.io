@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../site.config';
+
+const baw = SITE.projects[0];
+---
+
+<Layout title="Privacy Policy - Bookmark All Windows" theme="baw">
+  <div class="max-w-[800px] mx-auto px-6 py-10 relative z-10">
+
+    <h1 class="text-[2rem] font-bold text-[var(--color-accent)] mb-2">Privacy Policy</h1>
+    <p class="text-slate-500 mb-8 pb-4 border-b border-[#2e2e3a]">
+      <strong class="text-slate-300">Bookmark All Windows</strong> - Browser Extension<br />
+      Last Updated: January 3, 2026
+    </p>
+
+    <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-6 mb-8">
+      <h2 class="text-[var(--color-accent)] text-xl font-semibold mt-0 mb-3">🔒 TL;DR</h2>
+      <p class="mb-2 text-slate-300"><strong>We don't collect, store, or transmit any of your data. Period.</strong></p>
+      <p class="text-slate-400 mb-0">The extension works entirely offline within your browser. Your browsing data never leaves your device.</p>
+    </div>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">1. Information We Collect</h2>
+    <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-lg px-4 py-3 mb-4">
+      <strong class="text-emerald-400">We collect absolutely NO information.</strong>
+    </div>
+    <p class="mb-4">The "Bookmark All Windows" extension does not collect, store, or transmit any personal information or browsing data.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">2. How the Extension Works</h2>
+    <p class="mb-3">The extension operates entirely within your browser:</p>
+    <ul class="list-disc ml-6 mb-4 space-y-2">
+      <li><strong class="text-slate-300">Tab Information</strong>: The extension reads tab URLs and titles only when you click the bookmark button. This information is used solely to create bookmarks and is never stored or transmitted anywhere.</li>
+      <li><strong class="text-slate-300">Bookmarks</strong>: Bookmarks are created using your browser's built-in bookmark system. They are stored locally by your browser, not by the extension.</li>
+      <li><strong class="text-slate-300">No External Communication</strong>: The extension does not connect to any external servers, APIs, or services.</li>
+    </ul>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">3. Browser Permissions</h2>
+    <p class="mb-3">The extension requires the following permissions:</p>
+    <ul class="list-disc ml-6 mb-4 space-y-2">
+      <li><strong class="text-slate-300">tabs</strong>: Required to read the URLs and titles of your open tabs.</li>
+      <li><strong class="text-slate-300">bookmarks</strong>: Required to create bookmark folders and save bookmarks to your browser.</li>
+    </ul>
+    <p class="mb-4">These permissions are used exclusively for the extension's core functionality. No data accessed through these permissions is collected, stored, or shared.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">4. Data Storage</h2>
+    <p class="mb-4">The extension does not store any data. All bookmarks are stored by your browser's native bookmark system, which you have full control over.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">5. Third-Party Services</h2>
+    <p class="mb-4">The extension does not use any third-party services, analytics, tracking, or advertising.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">6. Data Sharing</h2>
+    <p class="mb-4">Since we don't collect any data, there is no data to share. We do not sell, trade, or transfer any information to third parties.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">7. Children's Privacy</h2>
+    <p class="mb-4">The extension does not collect any information from anyone, including children under 13 years of age.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">8. Changes to This Policy</h2>
+    <p class="mb-4">We may update this Privacy Policy from time to time. Any changes will be reflected on this page with an updated revision date.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">9. Open Source</h2>
+    <p class="mb-4">This extension is open source. You can review the complete source code on <a href={baw.repoUrl} target="_blank" rel="noopener" class="text-[var(--color-accent)] hover:underline">GitHub</a> to verify our privacy practices.</p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">10. Contact</h2>
+    <p class="mb-4">If you have any questions, please open an issue on our <a href={baw.repoUrl} target="_blank" rel="noopener" class="text-[var(--color-accent)] hover:underline">GitHub repository</a>.</p>
+
+    <div class="mt-12 pt-6 border-t border-[#2e2e3a] text-center text-slate-500">
+      <p>{SITE.author.copyright}</p>
+      <p class="mt-2"><a href="/bookmark-all-windows/terms" class="text-[var(--color-accent)] hover:underline">Terms of Use</a></p>
+    </div>
+
+  </div>
+</Layout>

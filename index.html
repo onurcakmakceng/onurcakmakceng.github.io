@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Onur Cakmak</title>
-  <meta name="description" content="Building useful tools and browser extensions for developers.">
+  <meta name="description" content="Senior Software Engineer. Building software, tools, and ideas worth sharing.">
   <script src="theme.js"></script>
 </head>
 <body class="bg-surface-base text-slate-100 min-h-screen overflow-x-hidden">
@@ -12,107 +12,180 @@
   <div class="noise fixed inset-0 pointer-events-none opacity-[0.03] z-[1000]"></div>
   <div class="ambient-glow fixed inset-0 pointer-events-none"></div>
 
-  <div class="max-w-[1200px] mx-auto px-6 relative z-10">
+  <div class="max-w-[1100px] mx-auto px-6 relative z-10">
 
     <nav class="py-6 flex justify-between items-center">
-      <div class="gradient-text text-2xl font-bold tracking-tight" id="site-logo">Onur Cakmak</div>
-      <ul class="hidden md:flex gap-8 list-none">
-        <li><a href="#projects" class="text-slate-400 text-[0.95rem] hover:text-slate-100 transition-colors">Projects</a></li>
-        <li><a href="#" id="nav-github" class="text-slate-400 text-[0.95rem] hover:text-slate-100 transition-colors">GitHub</a></li>
+      <div class="gradient-text text-xl font-bold tracking-tight">Onur Cakmak</div>
+      <ul class="hidden md:flex gap-8 list-none items-center">
+        <li><a href="#writing" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Writing</a></li>
+        <li><a href="#reading" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Reading</a></li>
+        <li><a href="#projects" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Projects</a></li>
+        <li>
+          <a href="#" id="nav-linkedin" target="_blank" class="text-slate-400 hover:text-slate-100 transition-colors" title="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+          </a>
+        </li>
+        <li>
+          <a href="#" id="nav-github" target="_blank" class="text-slate-400 hover:text-slate-100 transition-colors" title="GitHub">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+          </a>
+        </li>
       </ul>
     </nav>
 
-    <section class="pt-[120px] pb-20 text-center">
-      <h1 class="text-[clamp(2.5rem,6vw,4.5rem)] font-bold leading-[1.1] mb-6">
-        Building <span class="gradient-text">useful tools</span><br>for developers
-      </h1>
-      <p class="text-xl text-slate-400 max-w-[600px] mx-auto mb-12 leading-relaxed">
-        I create browser extensions and developer tools that solve real problems and make workflows more efficient.
-      </p>
-      <div class="flex gap-4 justify-center flex-wrap">
-        <a href="#projects" class="gradient-bg inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium text-white shadow-[0_4px_20px_rgba(56,189,248,0.25)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(56,189,248,0.3)] transition-all">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 5v14M5 12l7 7 7-7"/>
-          </svg>
-          View Projects
-        </a>
-        <a href="#" id="hero-github" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium bg-surface-card border border-surface-border text-slate-100 hover:bg-surface-raised hover:border-accent transition-all">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-          </svg>
-          GitHub
-        </a>
+    <!-- Hero / About -->
+    <section class="pt-24 pb-20">
+      <div class="max-w-[680px]">
+        <p class="font-mono text-xs text-accent uppercase tracking-widest mb-5">Software Engineer</p>
+        <h1 class="text-[clamp(2.4rem,5vw,3.8rem)] font-bold leading-[1.1] mb-6">
+          Hi, I'm <span class="gradient-text">Onur Cakmak</span>
+        </h1>
+        <p class="text-lg text-slate-400 leading-relaxed mb-8" id="hero-bio">
+          Senior Software Engineer at Metaphysic.ai. I build software, developer tools, and write about things I learn along the way.
+        </p>
+        <div class="flex gap-3 flex-wrap">
+          <a href="#projects" class="gradient-bg inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium text-white shadow-[0_4px_20px_rgba(56,189,248,0.2)] hover:-translate-y-0.5 transition-all">
+            View Projects
+          </a>
+          <a href="#" id="hero-linkedin" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium bg-surface-card border border-surface-border text-slate-100 hover:bg-surface-raised hover:border-accent transition-all">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+            </svg>
+            LinkedIn
+          </a>
+          <a href="#" id="hero-github" target="_blank" class="inline-flex items-center gap-2 px-6 py-3 rounded-xl text-sm font-medium bg-surface-card border border-surface-border text-slate-100 hover:bg-surface-raised hover:border-accent transition-all">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+            </svg>
+            GitHub
+          </a>
+        </div>
       </div>
     </section>
 
-    <section class="py-20" id="projects">
-      <div class="text-center mb-16">
-        <h2 class="text-[2.5rem] font-bold mb-4">Projects</h2>
-        <p class="text-slate-400 text-lg">Open source tools and extensions</p>
+    <!-- Writing -->
+    <section class="py-16 border-t border-surface-border" id="writing">
+      <div class="mb-10">
+        <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Writing</p>
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Articles</h2>
+          <a href="#" id="writing-more" target="_blank" class="text-sm text-slate-500 hover:text-accent transition-colors">All on Medium →</a>
+        </div>
       </div>
+      <div id="writing-list" class="flex flex-col gap-4"></div>
+    </section>
 
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(350px,420px))] gap-6 justify-center">
-        <article class="card-accent-line bg-surface-card border border-surface-border rounded-2xl p-8 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
-          <div class="w-14 h-14 bg-surface-raised rounded-[14px] flex items-center justify-center text-[28px] mb-5">📚</div>
-          <h3 class="text-[1.4rem] font-semibold mb-3">Bookmark All Windows</h3>
-          <p class="text-slate-400 leading-relaxed mb-6">A browser extension that saves all tabs from all open windows into organized bookmark folders with a single click. Never lose your browsing session again.</p>
-          <div class="flex flex-wrap gap-2 mb-6">
-            <span class="font-mono px-3 py-1.5 bg-surface-raised rounded-md text-xs text-slate-500">Chrome Extension</span>
-            <span class="font-mono px-3 py-1.5 bg-surface-raised rounded-md text-xs text-slate-500">JavaScript</span>
-            <span class="font-mono px-3 py-1.5 bg-surface-raised rounded-md text-xs text-slate-500">Manifest V3</span>
-          </div>
-          <div class="flex gap-3">
-            <a href="#" id="project-baw-github" class="inline-flex items-center gap-1.5 text-accent text-[0.9rem] font-medium hover:text-accent-light transition-colors">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-              </svg>
-              Source Code
-            </a>
-            <a href="#" id="project-baw-page" class="inline-flex items-center gap-1.5 text-accent text-[0.9rem] font-medium hover:text-accent-light transition-colors">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
-                <polyline points="15 3 21 3 21 9"/>
-                <line x1="10" y1="14" x2="21" y2="3"/>
-              </svg>
-              Project Page
-            </a>
-          </div>
-        </article>
+    <!-- Reading / Raindrop -->
+    <section class="py-16 border-t border-surface-border" id="reading">
+      <div class="mb-10">
+        <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Reading</p>
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Bookmarks</h2>
+          <a href="https://onurcakmakcs.raindrop.page/" target="_blank" class="text-sm text-slate-500 hover:text-accent transition-colors">View all →</a>
+        </div>
+        <p class="text-slate-500 text-sm mt-1">Links I've saved — CS fundamentals, tools, games, and more.</p>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-surface-border bg-surface-raised">
+        <iframe
+          style="border: 0; width: 100%; height: 420px; display: block;"
+          allowfullscreen
+          frameborder="0"
+          src="https://onurcakmakcs.raindrop.page/embed/me">
+        </iframe>
       </div>
     </section>
 
-    <footer class="py-12 border-t border-surface-border text-center">
-      <div class="flex justify-center gap-8 mb-6 flex-wrap">
-        <a href="#" id="footer-github" class="text-slate-400 hover:text-slate-100 transition-colors">GitHub</a>
-        <a href="#" id="footer-baw" class="text-slate-400 hover:text-slate-100 transition-colors">Bookmark All Windows</a>
+    <!-- Projects -->
+    <section class="py-16 border-t border-surface-border" id="projects">
+      <div class="mb-10">
+        <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Open Source</p>
+        <h2 class="text-2xl font-bold">Projects</h2>
       </div>
-      <p class="text-slate-500 text-[0.9rem]" id="footer-copy"></p>
+      <div id="projects-grid" class="grid grid-cols-[repeat(auto-fill,minmax(320px,400px))] gap-5"></div>
+    </section>
+
+    <footer class="py-12 border-t border-surface-border">
+      <div class="flex flex-col sm:flex-row justify-between items-center gap-4">
+        <p class="text-slate-500 text-sm" id="footer-copy"></p>
+        <div class="flex gap-6">
+          <a href="#" id="footer-linkedin" target="_blank" class="text-slate-500 hover:text-slate-100 transition-colors text-sm">LinkedIn</a>
+          <a href="#" id="footer-github" target="_blank" class="text-slate-500 hover:text-slate-100 transition-colors text-sm">GitHub</a>
+          <a href="#" id="footer-medium" target="_blank" class="text-slate-500 hover:text-slate-100 transition-colors text-sm">Medium</a>
+        </div>
+      </div>
     </footer>
 
   </div>
 
   <script src="config.js"></script>
   <script>
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function () {
       const config = window.SITE_CONFIG;
 
+      document.getElementById('hero-bio').textContent = config.author.bio;
+
       document.getElementById('nav-github').href = config.githubUrl;
-      document.getElementById('nav-github').target = '_blank';
+      document.getElementById('nav-linkedin').href = config.linkedinUrl;
 
       document.getElementById('hero-github').href = config.githubUrl;
-      document.getElementById('hero-github').target = '_blank';
+      document.getElementById('hero-linkedin').href = config.linkedinUrl;
 
-      document.getElementById('project-baw-github').href = config.projects.bookmarkAllWindows.repoUrl;
-      document.getElementById('project-baw-github').target = '_blank';
-
-      document.getElementById('project-baw-page').href = config.projects.bookmarkAllWindows.pageUrl;
-
+      document.getElementById('writing-more').href = config.mediumUrl;
       document.getElementById('footer-github').href = config.githubUrl;
-      document.getElementById('footer-github').target = '_blank';
-
-      document.getElementById('footer-baw').href = config.projects.bookmarkAllWindows.pageUrl;
-
+      document.getElementById('footer-linkedin').href = config.linkedinUrl;
+      document.getElementById('footer-medium').href = config.mediumUrl;
       document.getElementById('footer-copy').textContent = config.author.copyright;
+
+      const writingList = document.getElementById('writing-list');
+      config.writing.forEach(function (post) {
+        writingList.insertAdjacentHTML('beforeend', `
+          <a href="${post.url}" target="_blank"
+             class="group flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-5 bg-surface-card border border-surface-border rounded-xl hover:border-accent hover:-translate-y-0.5 transition-all">
+            <div>
+              <h3 class="font-semibold text-slate-100 group-hover:text-accent transition-colors leading-snug mb-1">${post.title}</h3>
+              <p class="text-sm text-slate-500 leading-relaxed">${post.description}</p>
+            </div>
+            <div class="flex sm:flex-col items-center sm:items-end gap-2 sm:gap-1 shrink-0 text-xs text-slate-600">
+              <span>${post.date}</span>
+              <span class="font-mono">${post.readTime}</span>
+            </div>
+          </a>
+        `);
+      });
+
+      const grid = document.getElementById('projects-grid');
+      const baw = config.projects.bookmarkAllWindows;
+      grid.insertAdjacentHTML('beforeend', `
+        <article class="card-accent-line bg-surface-card border border-surface-border rounded-2xl p-7 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-accent hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)]">
+          <div class="w-12 h-12 bg-surface-raised rounded-xl flex items-center justify-center text-2xl mb-4">📚</div>
+          <h3 class="text-lg font-semibold mb-2">${baw.name}</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-5">A browser extension that saves all tabs from all open windows into organized bookmark folders with a single click.</p>
+          <div class="flex flex-wrap gap-1.5 mb-5">
+            <span class="font-mono px-2.5 py-1 bg-surface-raised rounded text-[0.7rem] text-slate-500">Chrome Extension</span>
+            <span class="font-mono px-2.5 py-1 bg-surface-raised rounded text-[0.7rem] text-slate-500">JavaScript</span>
+            <span class="font-mono px-2.5 py-1 bg-surface-raised rounded text-[0.7rem] text-slate-500">Manifest V3</span>
+          </div>
+          <div class="flex gap-4">
+            <a href="${baw.pageUrl}" class="inline-flex items-center gap-1.5 text-accent text-sm font-medium hover:text-accent-light transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                <polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/>
+              </svg>
+              Project Page
+            </a>
+            <a href="${baw.repoUrl}" target="_blank" class="inline-flex items-center gap-1.5 text-slate-500 text-sm font-medium hover:text-slate-300 transition-colors">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              Source
+            </a>
+          </div>
+        </article>
+      `);
     });
   </script>
 </body>
