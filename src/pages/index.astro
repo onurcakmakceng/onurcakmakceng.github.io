@@ -44,9 +44,7 @@ import { SITE, MEDIUM_RSS } from '../site.config';
           <h1 class="text-[clamp(2.2rem,5vw,3.4rem)] font-bold leading-[1.1] mb-4">
             Hi, I'm <span class="gradient-text">{SITE.author.name}</span>
           </h1>
-          <p class="text-lg text-slate-400 leading-relaxed mb-6">
-            Senior Software Engineer at <a href="https://www.linkedin.com/company/metaphysic/" target="_blank" rel="noopener" class="text-slate-300 hover:text-[var(--color-accent)] transition-colors">Metaphysic.ai</a> <span class="text-slate-500 text-base">(Acquired by <a href="https://www.dneg.com" target="_blank" rel="noopener" class="hover:text-[var(--color-accent)] transition-colors">DNEG Group</a> and re-branded under <a href="https://brahma.io" target="_blank" rel="noopener" class="hover:text-[var(--color-accent)] transition-colors">Brahma AI</a>)</span>. I build software, developer tools, and write about things I learn along the way.
-          </p>
+          <p class="text-lg text-slate-400 leading-relaxed mb-6" set:html={SITE.author.bio} />
           <div class="flex gap-3 flex-wrap">
             <a href="#projects" class="gradient-bg inline-flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-medium text-white hover:-translate-y-0.5 transition-all">
               Side Projects

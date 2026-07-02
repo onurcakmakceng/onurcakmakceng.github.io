@@ -15,7 +15,7 @@ export const SITE = {
 
   author: {
     name: 'Onur Cakmak',
-    bio: 'Senior Software Engineer at Metaphysic.ai. I build software, developer tools, and write about things I learn along the way.',
+    bio: 'Senior Software Engineer at <a href="https://www.linkedin.com/company/metaphysic/" target="_blank" rel="noopener" class="text-slate-300 hover:text-[var(--color-accent)] transition-colors">Metaphysic.ai</a> <span class="text-slate-500 text-base">(Acquired by <a href="https://www.dneg.com" target="_blank" rel="noopener" class="hover:text-[var(--color-accent)] transition-colors">DNEG Group</a> and re-branded under <a href="https://brahma.io" target="_blank" rel="noopener" class="hover:text-[var(--color-accent)] transition-colors">Brahma AI</a>)</span>. I build software, developer tools, and write about things I learn along the way.',
     get copyright() {
       return `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`;
     },
