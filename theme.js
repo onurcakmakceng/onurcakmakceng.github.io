@@ -5,17 +5,17 @@
   const palettes = {
     default: {
       accentDefault: '#38bdf8',
-      accentBlue:    '#2563eb',
-      accentSky:     '#0ea5e9',
-      accentCyan:    '#06b6d4',
-      accentLight:   '#7dd3fc',
+      accentBlue: '#2563eb',
+      accentSky: '#0ea5e9',
+      accentCyan: '#06b6d4',
+      accentLight: '#7dd3fc',
     },
     baw: {
       accentDefault: '#fb923c',
-      accentBlue:    '#f97316',
-      accentSky:     '#fb923c',
-      accentCyan:    '#fdba74',
-      accentLight:   '#fed7aa',
+      accentBlue: '#f97316',
+      accentSky: '#fb923c',
+      accentCyan: '#fdba74',
+      accentLight: '#fed7aa',
     },
   };
 
@@ -44,7 +44,10 @@
 
   injectLink('preconnect', 'https://fonts.googleapis.com');
   injectLink('preconnect', 'https://fonts.gstatic.com', { crossOrigin: 'anonymous' });
-  injectLink('stylesheet', 'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+  injectLink(
+    'stylesheet',
+    'https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap'
+  );
 
   injectScript('https://cdn.tailwindcss.com', function () {
     tailwind.config = {
@@ -56,17 +59,17 @@
           },
           colors: {
             surface: {
-              base:   '#18181c',
+              base: '#18181c',
               raised: '#202027',
-              card:   '#26262e',
+              card: '#26262e',
               border: '#2e2e3a',
             },
             accent: {
               DEFAULT: p.accentDefault,
-              blue:    p.accentBlue,
-              sky:     p.accentSky,
-              cyan:    p.accentCyan,
-              light:   p.accentLight,
+              blue: p.accentBlue,
+              sky: p.accentSky,
+              cyan: p.accentCyan,
+              light: p.accentLight,
             },
           },
         },
@@ -74,31 +77,24 @@
     };
   });
 
-  const gradientText = theme === 'baw'
-    ? `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 100%)`
-    : `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 50%, ${p.accentCyan} 100%)`;
+  const gradientText =
+    theme === 'baw'
+      ? `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 100%)`
+      : `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 50%, ${p.accentCyan} 100%)`;
 
-  const gradientBg = theme === 'baw'
-    ? `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 100%)`
-    : `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 50%, ${p.accentCyan} 100%)`;
+  const gradientBg =
+    theme === 'baw'
+      ? `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 100%)`
+      : `linear-gradient(135deg, ${p.accentBlue} 0%, ${p.accentSky} 50%, ${p.accentCyan} 100%)`;
 
-  const ambientA = theme === 'baw'
-    ? 'rgba(249, 115, 22, 0.12)'
-    : 'rgba(37, 99, 235, 0.12)';
-  const ambientB = theme === 'baw'
-    ? 'rgba(251, 146, 60, 0.08)'
-    : 'rgba(6, 182, 212, 0.08)';
+  const ambientA = theme === 'baw' ? 'rgba(249, 115, 22, 0.12)' : 'rgba(37, 99, 235, 0.12)';
+  const ambientB = theme === 'baw' ? 'rgba(251, 146, 60, 0.08)' : 'rgba(6, 182, 212, 0.08)';
 
-  const stepGlowColor = theme === 'baw'
-    ? `${p.accentBlue} !important`
-    : `${p.accentSky} !important`;
-  const stepGlowShadow = theme === 'baw'
-    ? `rgba(249, 115, 22, 0.3)`
-    : `rgba(14, 165, 233, 0.25)`;
+  const stepGlowColor =
+    theme === 'baw' ? `${p.accentBlue} !important` : `${p.accentSky} !important`;
+  const stepGlowShadow = theme === 'baw' ? `rgba(249, 115, 22, 0.3)` : `rgba(14, 165, 233, 0.25)`;
 
-  const heroGlowColor = theme === 'baw'
-    ? `rgba(249, 115, 22, 0.25)`
-    : `rgba(14, 165, 233, 0.2)`;
+  const heroGlowColor = theme === 'baw' ? `rgba(249, 115, 22, 0.25)` : `rgba(14, 165, 233, 0.2)`;
 
   injectStyle(`
     body { font-family: 'Outfit', sans-serif; }
