@@ -11,16 +11,17 @@ const SITE_CONFIG = {
   author: {
     name: 'Onur Cakmak',
     bio: 'Senior Software Engineer at Metaphysic.ai. Building software, tools, and ideas worth sharing.',
-    copyright: `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`
+    copyright: `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`,
   },
 
   writing: [
     {
-      title: 'AI Code Generation Manifesto: Save Your Team\'s Collective Time',
+      title: "AI Code Generation Manifesto: Save Your Team's Collective Time",
       url: 'https://medium.com/@onurcakmak/ai-code-generation-manifesto-8782593e5db5',
       date: 'Aug 31, 2025',
       readTime: '2 min read',
-      description: 'A practical guide on how to use AI code generation responsibly — step by step, protecting team effort, and keeping PRs clean and reviewable.',
+      description:
+        'A practical guide on how to use AI code generation responsibly — step by step, protecting team effort, and keeping PRs clean and reviewable.',
     },
   ],
 
@@ -29,9 +30,9 @@ const SITE_CONFIG = {
       name: 'Bookmark All Windows',
       repoUrl: 'https://github.com/onurcakmakeng/bookmark-all-windows',
       pageUrl: '/bookmark-all-windows/',
-      licenseUrl: 'https://github.com/onurcakmakeng/bookmark-all-windows/blob/main/LICENSE'
-    }
-  }
+      licenseUrl: 'https://github.com/onurcakmakeng/bookmark-all-windows/blob/main/LICENSE',
+    },
+  },
 };
 
 if (typeof window !== 'undefined') {

@@ -30,11 +30,9 @@ export const SITE = {
       tags: ['Chrome Extension'],
       pageUrl: '/bookmark-all-windows/',
       repoUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows',
-      licenseUrl:
-        'https://github.com/onurcakmakceng/bookmark-all-windows/blob/main/LICENSE',
+      licenseUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows/blob/main/LICENSE',
     },
   ],
 } as const;
 
-export const MEDIUM_RSS =
-  `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://medium.com/feed/@onurcakmak')}`;
+export const MEDIUM_RSS = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://medium.com/feed/@onurcakmak')}`;
