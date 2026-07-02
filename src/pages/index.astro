@@ -10,8 +10,8 @@ import { SITE, MEDIUM_RSS } from '../site.config';
       <span class="gradient-text text-xl font-bold tracking-tight">{SITE.name}</span>
       <ul class="flex gap-8 list-none items-center">
         <li>
-          <a href="#writing" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
-            >Writing</a
+          <a href="#projects" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Projects</a
           >
         </li>
         <li>
@@ -20,8 +20,8 @@ import { SITE, MEDIUM_RSS } from '../site.config';
           >
         </li>
         <li>
-          <a href="#projects" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
-            >Projects</a
+          <a href="#writing" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Writing</a
           >
         </li>
         <li>
@@ -125,65 +125,6 @@ import { SITE, MEDIUM_RSS } from '../site.config';
       </div>
     </section>
 
-    <!-- Writing -->
-    <section class="py-14 border-t border-[#2e2e3a]" id="writing">
-      <div class="mb-8">
-        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
-          Writing
-        </p>
-        <div class="flex items-end justify-between">
-          <h2 class="text-2xl font-bold">Articles</h2>
-          <a
-            href={SITE.social.medium}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
-            >All on Medium →</a
-          >
-        </div>
-      </div>
-      <div id="writing-list" class="flex flex-col gap-4">
-        <div class="flex flex-col gap-3" id="writing-skeleton">
-          {
-            [1, 2].map(() => (
-              <div class="h-24 rounded-xl bg-[#26262e] border border-[#2e2e3a] animate-pulse" />
-            ))
-          }
-        </div>
-      </div>
-    </section>
-
-    <!-- Reading -->
-    <section class="py-14 border-t border-[#2e2e3a]" id="reading">
-      <div class="mb-8">
-        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
-          Reading
-        </p>
-        <div class="flex items-end justify-between">
-          <h2 class="text-2xl font-bold">Bookmarks</h2>
-          <a
-            href={SITE.social.raindrop}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
-            >View all →</a
-          >
-        </div>
-        <p class="text-slate-500 text-sm mt-1">
-          Links I've saved — CS fundamentals, tools, games, and more.
-        </p>
-      </div>
-      <div class="rounded-2xl overflow-hidden border border-[#2e2e3a] bg-[#202027]">
-        <iframe
-          class="block w-full h-[420px] lg:h-[620px]"
-          style="border:0;"
-          allowfullscreen
-          frameborder="0"
-          src="https://onurcakmakcs.raindrop.page/embed/me"
-          loading="lazy"></iframe>
-      </div>
-    </section>
-
     <!-- Side Projects -->
     <section class="py-14 border-t border-[#2e2e3a]" id="projects">
       <div class="mb-8">
@@ -243,6 +184,65 @@ import { SITE, MEDIUM_RSS } from '../site.config';
             </article>
           ))
         }
+      </div>
+    </section>
+
+    <!-- Reading -->
+    <section class="py-14 border-t border-[#2e2e3a]" id="reading">
+      <div class="mb-8">
+        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
+          Reading
+        </p>
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Bookmarks</h2>
+          <a
+            href={SITE.social.raindrop}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
+            >View all →</a
+          >
+        </div>
+        <p class="text-slate-500 text-sm mt-1">
+          Links I've saved — CS fundamentals, tools, games, and more.
+        </p>
+      </div>
+      <div class="rounded-2xl overflow-hidden border border-[#2e2e3a] bg-[#202027]">
+        <iframe
+          class="block w-full h-[420px] lg:h-[620px]"
+          style="border:0;"
+          allowfullscreen
+          frameborder="0"
+          src="https://onurcakmakcs.raindrop.page/embed/me"
+          loading="lazy"></iframe>
+      </div>
+    </section>
+
+    <!-- Writing -->
+    <section class="py-14 border-t border-[#2e2e3a]" id="writing">
+      <div class="mb-8">
+        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
+          Writing
+        </p>
+        <div class="flex items-end justify-between">
+          <h2 class="text-2xl font-bold">Articles</h2>
+          <a
+            href={SITE.social.medium}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
+            >All on Medium →</a
+          >
+        </div>
+      </div>
+      <div id="writing-list" class="flex flex-col gap-4">
+        <div class="flex flex-col gap-3" id="writing-skeleton">
+          {
+            [1, 2].map(() => (
+              <div class="h-24 rounded-xl bg-[#26262e] border border-[#2e2e3a] animate-pulse" />
+            ))
+          }
+        </div>
       </div>
     </section>
 

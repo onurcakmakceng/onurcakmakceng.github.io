@@ -19,9 +19,9 @@
         <ul class="hidden md:flex gap-8 list-none items-center">
           <li>
             <a
-              href="#writing"
+              href="#projects"
               class="text-slate-400 text-sm hover:text-slate-100 transition-colors">
-              Writing
+              Projects
             </a>
           </li>
           <li>
@@ -33,9 +33,9 @@
           </li>
           <li>
             <a
-              href="#projects"
+              href="#writing"
               class="text-slate-400 text-sm hover:text-slate-100 transition-colors">
-              Projects
+              Writing
             </a>
           </li>
           <li>
@@ -113,22 +113,15 @@
         </div>
       </section>
 
-      <!-- Writing -->
-      <section class="py-16 border-t border-surface-border" id="writing">
+      <!-- Projects -->
+      <section class="py-16 border-t border-surface-border" id="projects">
         <div class="mb-10">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Writing</p>
-          <div class="flex items-end justify-between">
-            <h2 class="text-2xl font-bold">Articles</h2>
-            <a
-              href="#"
-              id="writing-more"
-              target="_blank"
-              class="text-sm text-slate-500 hover:text-accent transition-colors">
-              All on Medium →
-            </a>
-          </div>
+          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Open Source</p>
+          <h2 class="text-2xl font-bold">Projects</h2>
         </div>
-        <div id="writing-list" class="flex flex-col gap-4"></div>
+        <div
+          id="projects-grid"
+          class="grid grid-cols-[repeat(auto-fill,minmax(320px,400px))] gap-5"></div>
       </section>
 
       <!-- Reading / Raindrop -->
@@ -158,15 +151,22 @@
         </div>
       </section>
 
-      <!-- Projects -->
-      <section class="py-16 border-t border-surface-border" id="projects">
+      <!-- Writing -->
+      <section class="py-16 border-t border-surface-border" id="writing">
         <div class="mb-10">
-          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Open Source</p>
-          <h2 class="text-2xl font-bold">Projects</h2>
+          <p class="font-mono text-xs text-accent uppercase tracking-widest mb-2">Writing</p>
+          <div class="flex items-end justify-between">
+            <h2 class="text-2xl font-bold">Articles</h2>
+            <a
+              href="#"
+              id="writing-more"
+              target="_blank"
+              class="text-sm text-slate-500 hover:text-accent transition-colors">
+              All on Medium →
+            </a>
+          </div>
         </div>
-        <div
-          id="projects-grid"
-          class="grid grid-cols-[repeat(auto-fill,minmax(320px,400px))] gap-5"></div>
+        <div id="writing-list" class="flex flex-col gap-4"></div>
       </section>
 
       <footer class="py-12 border-t border-surface-border">
