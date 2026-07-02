@@ -27,7 +27,7 @@ export const SITE = {
       description:
         'A browser extension that saves all tabs from all open windows into organized bookmark folders with a single click.',
       icon: '📚',
-      tags: ['Chrome Extension', 'JavaScript', 'Manifest V3'],
+      tags: ['Chrome Extension'],
       pageUrl: '/bookmark-all-windows/',
       repoUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows',
       licenseUrl:
