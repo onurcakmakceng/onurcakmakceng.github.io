@@ -13,5 +13,11 @@ export default {
         parser: 'astro',
       },
     },
+    {
+      files: ['*.html'],
+      options: {
+        bracketSameLine: true,
+      },
+    },
   ],
 };
