@@ -4,7 +4,7 @@ export default {
   singleQuote: true,
   semi: true,
   tabWidth: 2,
-  printWidth: 100,
+  printWidth: 120,
   trailingComma: 'es5',
   overrides: [
     {

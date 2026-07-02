@@ -90,8 +90,7 @@
   const ambientA = theme === 'baw' ? 'rgba(249, 115, 22, 0.12)' : 'rgba(37, 99, 235, 0.12)';
   const ambientB = theme === 'baw' ? 'rgba(251, 146, 60, 0.08)' : 'rgba(6, 182, 212, 0.08)';
 
-  const stepGlowColor =
-    theme === 'baw' ? `${p.accentBlue} !important` : `${p.accentSky} !important`;
+  const stepGlowColor = theme === 'baw' ? `${p.accentBlue} !important` : `${p.accentSky} !important`;
   const stepGlowShadow = theme === 'baw' ? `rgba(249, 115, 22, 0.3)` : `rgba(14, 165, 233, 0.25)`;
 
   const heroGlowColor = theme === 'baw' ? `rgba(249, 115, 22, 0.25)` : `rgba(14, 165, 233, 0.2)`;
