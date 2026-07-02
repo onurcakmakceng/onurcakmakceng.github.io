@@ -12,16 +12,24 @@ const baw = SITE.projects[0];
 >
   <div class="max-w-[1100px] mx-auto px-6 relative z-10">
     <nav class="py-6 flex justify-between items-center">
-      <a href="/" class="flex items-center gap-3 text-slate-100 no-underline hover:opacity-80 transition-opacity">
+      <a
+        href="/"
+        class="flex items-center gap-3 text-slate-100 no-underline hover:opacity-80 transition-opacity"
+      >
         <span class="text-[1.8rem]">📚</span>
         <span class="text-xl font-semibold">Bookmark All Windows</span>
       </a>
       <ul class="hidden md:flex gap-6 list-none">
         <li>
-          <a href="#features" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Features</a>
+          <a href="#features" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Features</a
+          >
         </li>
         <li>
-          <a href="#how-it-works" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">How It Works</a>
+          <a
+            href="#how-it-works"
+            class="text-slate-400 text-sm hover:text-slate-100 transition-colors">How It Works</a
+          >
         </li>
         <li>
           <a
@@ -44,7 +52,8 @@ const baw = SITE.projects[0];
         Save <span class="gradient-text">all your tabs</span><br />with one click
       </h1>
       <p class="text-lg text-slate-400 max-w-[600px] mx-auto mb-10 leading-relaxed">
-        Stop losing your browsing sessions. Bookmark all tabs from all open windows into organized folders instantly.
+        Stop losing your browsing sessions. Bookmark all tabs from all open windows into organized
+        folders instantly.
       </p>
       <div class="flex gap-4 justify-center flex-wrap mb-16">
         <a
@@ -74,7 +83,9 @@ const baw = SITE.projects[0];
           View Source
         </a>
       </div>
-      <div class="max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-[#2e2e3a] hero-image-glow">
+      <div
+        class="max-w-[500px] mx-auto rounded-2xl overflow-hidden border border-[#2e2e3a] hero-image-glow"
+      >
         <img
           src="https://github.com/user-attachments/assets/9e19fb1d-8114-47b7-9557-493b5a685f58"
           alt="Bookmark All Windows Extension Screenshot"
@@ -167,7 +178,9 @@ const baw = SITE.projects[0];
                 <p class="text-slate-400 text-xs">{desc}</p>
               </div>
               {i < arr.length - 1 && (
-                <div class="hidden md:flex items-center text-[var(--color-accent)] text-2xl pt-5">→</div>
+                <div class="hidden md:flex items-center text-[var(--color-accent)] text-2xl pt-5">
+                  →
+                </div>
               )}
             </>
           ))
@@ -204,8 +217,9 @@ const baw = SITE.projects[0];
           <p class="text-slate-400 text-sm leading-relaxed mb-3">
             By using this extension, you agree to our terms including our disclaimer of liability.
           </p>
-          <a href="/bookmark-all-windows/terms" class="text-[var(--color-accent)] text-sm font-medium hover:underline"
-            >Read Terms →</a
+          <a
+            href="/bookmark-all-windows/terms"
+            class="text-[var(--color-accent)] text-sm font-medium hover:underline">Read Terms →</a
           >
         </div>
         <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-5">
@@ -213,13 +227,17 @@ const baw = SITE.projects[0];
           <p class="text-slate-400 text-sm leading-relaxed mb-3">
             We don't collect any data. Works entirely offline within your browser.
           </p>
-          <a href="/bookmark-all-windows/privacy" class="text-[var(--color-accent)] text-sm font-medium hover:underline"
+          <a
+            href="/bookmark-all-windows/privacy"
+            class="text-[var(--color-accent)] text-sm font-medium hover:underline"
             >Read Privacy Policy →</a
           >
         </div>
         <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-5">
           <h3 class="text-base font-semibold mb-2">⚖️ License</h3>
-          <p class="text-slate-400 text-sm leading-relaxed mb-3">Open source and licensed under AGPL-3.0.</p>
+          <p class="text-slate-400 text-sm leading-relaxed mb-3">
+            Open source and licensed under AGPL-3.0.
+          </p>
           <a
             href={baw.licenseUrl}
             target="_blank"
@@ -239,8 +257,13 @@ const baw = SITE.projects[0];
           rel="noopener"
           class="text-slate-500 hover:text-slate-100 transition-colors">GitHub</a
         >
-        <a href="/bookmark-all-windows/terms" class="text-slate-500 hover:text-slate-100 transition-colors">Terms</a>
-        <a href="/bookmark-all-windows/privacy" class="text-slate-500 hover:text-slate-100 transition-colors">Privacy</a
+        <a
+          href="/bookmark-all-windows/terms"
+          class="text-slate-500 hover:text-slate-100 transition-colors">Terms</a
+        >
+        <a
+          href="/bookmark-all-windows/privacy"
+          class="text-slate-500 hover:text-slate-100 transition-colors">Privacy</a
         >
       </div>
       <p class="text-slate-600 text-sm">{SITE.author.copyright}</p>

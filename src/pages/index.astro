@@ -10,13 +10,19 @@ import { SITE, MEDIUM_RSS } from '../site.config';
       <span class="gradient-text text-xl font-bold tracking-tight">{SITE.name}</span>
       <ul class="hidden md:flex gap-8 list-none items-center">
         <li>
-          <a href="#writing" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Writing</a>
+          <a href="#writing" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Writing</a
+          >
         </li>
         <li>
-          <a href="#reading" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Reading</a>
+          <a href="#reading" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Reading</a
+          >
         </li>
         <li>
-          <a href="#projects" class="text-slate-400 text-sm hover:text-slate-100 transition-colors">Projects</a>
+          <a href="#projects" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Projects</a
+          >
         </li>
         <li>
           <a
@@ -70,13 +76,15 @@ import { SITE, MEDIUM_RSS } from '../site.config';
               href="https://www.linkedin.com/company/metaphysic/"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-slate-200 hover:text-[var(--color-accent)] transition-colors">Metaphysic.ai</a
+              class="text-slate-200 hover:text-[var(--color-accent)] transition-colors"
+              >Metaphysic.ai</a
             >
             (Acquired by <a
               href="https://www.dneg.com"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-slate-200 hover:text-[var(--color-accent)] transition-colors">DNEG Group</a
+              class="text-slate-200 hover:text-[var(--color-accent)] transition-colors"
+              >DNEG Group</a
             >
             and re-branded under <a
               href="https://brahma.io"
@@ -126,20 +134,27 @@ import { SITE, MEDIUM_RSS } from '../site.config';
     <!-- Writing -->
     <section class="py-14 border-t border-[#2e2e3a]" id="writing">
       <div class="mb-8">
-        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">Writing</p>
+        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
+          Writing
+        </p>
         <div class="flex items-end justify-between">
           <h2 class="text-2xl font-bold">Articles</h2>
           <a
             href={SITE.social.medium}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors">All on Medium →</a
+            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
+            >All on Medium →</a
           >
         </div>
       </div>
       <div id="writing-list" class="flex flex-col gap-4">
         <div class="flex flex-col gap-3" id="writing-skeleton">
-          {[1, 2].map(() => <div class="h-24 rounded-xl bg-[#26262e] border border-[#2e2e3a] animate-pulse" />)}
+          {
+            [1, 2].map(() => (
+              <div class="h-24 rounded-xl bg-[#26262e] border border-[#2e2e3a] animate-pulse" />
+            ))
+          }
         </div>
       </div>
     </section>
@@ -147,17 +162,22 @@ import { SITE, MEDIUM_RSS } from '../site.config';
     <!-- Reading -->
     <section class="py-14 border-t border-[#2e2e3a]" id="reading">
       <div class="mb-8">
-        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">Reading</p>
+        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
+          Reading
+        </p>
         <div class="flex items-end justify-between">
           <h2 class="text-2xl font-bold">Bookmarks</h2>
           <a
             href={SITE.social.raindrop}
             target="_blank"
             rel="noopener noreferrer"
-            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors">View all →</a
+            class="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
+            >View all →</a
           >
         </div>
-        <p class="text-slate-500 text-sm mt-1">Links I've saved — CS fundamentals, tools, games, and more.</p>
+        <p class="text-slate-500 text-sm mt-1">
+          Links I've saved — CS fundamentals, tools, games, and more.
+        </p>
       </div>
       <div class="rounded-2xl overflow-hidden border border-[#2e2e3a] bg-[#202027]">
         <iframe
@@ -172,14 +192,20 @@ import { SITE, MEDIUM_RSS } from '../site.config';
     <!-- Side Projects -->
     <section class="py-14 border-t border-[#2e2e3a]" id="projects">
       <div class="mb-8">
-        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">Open Source</p>
+        <p class="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
+          Open Source
+        </p>
         <h2 class="text-2xl font-bold">Side Projects</h2>
       </div>
       <div class="grid grid-cols-[repeat(auto-fill,minmax(300px,380px))] gap-5">
         {
           SITE.projects.map((project) => (
             <article class="card-accent-line bg-[#26262e] border border-[#2e2e3a] rounded-2xl p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] cursor-pointer">
-              <a href={project.pageUrl} class="absolute inset-0 z-0" aria-label={`View ${project.name} project page`} />
+              <a
+                href={project.pageUrl}
+                class="absolute inset-0 z-0"
+                aria-label={`View ${project.name} project page`}
+              />
               <div class="w-11 h-11 bg-[#202027] rounded-xl flex items-center justify-center text-2xl mb-4">
                 {project.icon}
               </div>
@@ -187,12 +213,20 @@ import { SITE, MEDIUM_RSS } from '../site.config';
               <p class="text-slate-400 text-sm leading-relaxed mb-4">{project.description}</p>
               <div class="flex flex-wrap gap-1.5 mb-4">
                 {project.tags.map((tag) => (
-                  <span class="font-mono px-2.5 py-1 bg-[#202027] rounded text-[0.7rem] text-slate-500">{tag}</span>
+                  <span class="font-mono px-2.5 py-1 bg-[#202027] rounded text-[0.7rem] text-slate-500">
+                    {tag}
+                  </span>
                 ))}
               </div>
               <div class="flex gap-4">
                 <span class="relative z-10 inline-flex items-center gap-1.5 text-[var(--color-accent)] text-sm font-medium">
-                  <svg class="w-3.5 h-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <svg
+                    class="w-3.5 h-3.5"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
                     <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                     <polyline points="15 3 21 3 21 9" />
                     <line x1="10" y1="14" x2="21" y2="3" />
