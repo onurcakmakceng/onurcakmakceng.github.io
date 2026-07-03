@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'Onur Cakmak',
   title: 'Onur Cakmak',
-  description: 'Senior Software Engineer. Building software, tools, and ideas worth sharing.',
+  description: 'Senior Software Engineer with 7+ years of experience. Passionate about quality products, deep technical learning, and building things people love to use.',
   url: 'https://onurcakmakceng.github.io',
 
   avatarUrl: 'https://avatars.githubusercontent.com/u/28986277?v=4',
@@ -15,7 +15,6 @@ export const SITE = {
 
   author: {
     name: 'Onur Cakmak',
-    bio: 'Senior Software Engineer at Metaphysic.ai. I build software, developer tools, and write about things I learn along the way.',
     get copyright() {
       return `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`;
     },
