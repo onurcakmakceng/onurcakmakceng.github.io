@@ -15,7 +15,6 @@ export const SITE = {
 
   author: {
     name: 'Onur Cakmak',
-    bio: 'Senior Software Engineer at Metaphysic.ai. I build software, developer tools, and write about things I learn along the way.',
     get copyright() {
       return `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`;
     },
