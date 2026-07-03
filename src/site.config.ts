@@ -1,7 +1,7 @@
 export const SITE = {
   name: 'Onur Cakmak',
   title: 'Onur Cakmak',
-  description: 'Senior Software Engineer with 7+ years of experience. Passionate about quality products, deep technical learning, and collaborative team growth.',
+  description: 'Senior Software Engineer with 7+ years of experience. Passionate about quality products, deep technical learning, and building things real people love to use.',
   url: 'https://onurcakmakceng.github.io',
 
   avatarUrl: 'https://avatars.githubusercontent.com/u/28986277?v=4',
