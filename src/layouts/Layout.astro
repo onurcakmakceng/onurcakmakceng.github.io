@@ -5,34 +5,45 @@ import '../styles/global.css';
 interface Props {
   title?: string;
   description?: string;
-  theme?: 'default' | 'baw';
+  theme?: 'default' | 'baw' | 'rc';
 }
 
 const { title = SITE.title, description = SITE.description, theme = 'default' } = Astro.props;
 
-const isBaw = theme === 'baw';
+const palettes = {
+  default: {
+    from: '#2563eb',
+    via: '#0ea5e9',
+    to: '#06b6d4',
+    ambientA: 'rgba(37,99,235,0.12)',
+    ambientB: 'rgba(6,182,212,0.08)',
+    glowBtn: 'rgba(56,189,248,0.25)',
+    accentDefault: '#38bdf8',
+    accentLight: '#7dd3fc',
+  },
+  baw: {
+    from: '#f97316',
+    via: '#fb923c',
+    to: '#fdba74',
+    ambientA: 'rgba(249,115,22,0.12)',
+    ambientB: 'rgba(251,146,60,0.08)',
+    glowBtn: 'rgba(249,115,22,0.3)',
+    accentDefault: '#fb923c',
+    accentLight: '#fed7aa',
+  },
+  rc: {
+    from: '#10b981',
+    via: '#34d399',
+    to: '#6ee7b7',
+    ambientA: 'rgba(16,185,129,0.12)',
+    ambientB: 'rgba(52,211,153,0.08)',
+    glowBtn: 'rgba(16,185,129,0.3)',
+    accentDefault: '#34d399',
+    accentLight: '#a7f3d0',
+  },
+};
 
-const palette = isBaw
-  ? {
-      from: '#f97316',
-      via: '#fb923c',
-      to: '#fdba74',
-      ambientA: 'rgba(249,115,22,0.12)',
-      ambientB: 'rgba(251,146,60,0.08)',
-      glowBtn: 'rgba(249,115,22,0.3)',
-      accentDefault: '#fb923c',
-      accentLight: '#fed7aa',
-    }
-  : {
-      from: '#2563eb',
-      via: '#0ea5e9',
-      to: '#06b6d4',
-      ambientA: 'rgba(37,99,235,0.12)',
-      ambientB: 'rgba(6,182,212,0.08)',
-      glowBtn: 'rgba(56,189,248,0.25)',
-      accentDefault: '#38bdf8',
-      accentLight: '#7dd3fc',
-    };
+const palette = palettes[theme] ?? palettes.default;
 ---
 
 <!doctype html>

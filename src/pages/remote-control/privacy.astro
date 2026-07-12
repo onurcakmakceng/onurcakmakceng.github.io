@@ -1,0 +1,111 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../site.config';
+
+const rc = SITE.projects[1];
+---
+
+<Layout title="Privacy Policy - Remote Control" theme="rc">
+  <div class="max-w-[800px] mx-auto px-6 py-10 relative z-10">
+    <h1 class="text-[2rem] font-bold text-[var(--color-accent)] mb-2">Privacy Policy</h1>
+    <p class="text-slate-500 mb-8 pb-4 border-b border-[#2e2e3a]">
+      <strong class="text-slate-300">Remote Control</strong> - Arduino Wake on LAN via MQTT<br />
+      Last Updated: July 12, 2026
+    </p>
+
+    <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-6 mb-8">
+      <h2 class="text-[var(--color-accent)] text-xl font-semibold mt-0 mb-3">🔒 TL;DR</h2>
+      <p class="mb-2 text-slate-300">
+        <strong>This project collects no data whatsoever. It runs entirely on your own hardware.</strong>
+      </p>
+      <p class="text-slate-400 mb-0">
+        The Arduino firmware and all related code run locally on your network. Your MQTT broker
+        credentials and network details never leave your own infrastructure.
+      </p>
+    </div>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">1. Information We Collect</h2>
+    <div class="bg-emerald-950/40 border border-emerald-500/40 rounded-lg px-4 py-3 mb-4">
+      <strong class="text-emerald-400">We collect absolutely NO information.</strong>
+    </div>
+    <p class="mb-4">
+      The Remote Control project does not collect, store, or transmit any personal information. All
+      code runs on hardware you own and control.
+    </p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">2. How the Project Works</h2>
+    <p class="mb-3">All components operate within your own infrastructure:</p>
+    <ul class="list-disc ml-6 mb-4 space-y-2">
+      <li>
+        <strong class="text-slate-300">Arduino Firmware</strong>: Runs locally on your Arduino
+        device. Connects to the MQTT broker you configure and listens for wake commands.
+      </li>
+      <li>
+        <strong class="text-slate-300">MQTT Broker</strong>: You choose and configure your own
+        broker (e.g., CloudMQTT, Mosquitto). Credentials are stored only in your Arduino sketch and
+        your MQTT client.
+      </li>
+      <li>
+        <strong class="text-slate-300">Wake on LAN</strong>: Magic packets are sent over your local
+        network only. No external server is involved in the wake process.
+      </li>
+    </ul>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">3. Third-Party Services</h2>
+    <p class="mb-4">
+      This project is designed to work with a third-party MQTT broker of your choosing. The privacy
+      policy of that broker applies to any data it handles. The project author has no affiliation
+      with or access to any broker you use.
+    </p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">4. Data Storage</h2>
+    <p class="mb-4">
+      No data is stored by this project. Your MQTT credentials and target MAC addresses live only
+      in your Arduino sketch and your MQTT client configuration, both of which you control
+      entirely.
+    </p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">5. Data Sharing</h2>
+    <p class="mb-4">
+      Since no data is collected, there is nothing to share. The project author does not receive,
+      store, or process any information from users of this project.
+    </p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">6. Open Source</h2>
+    <p class="mb-4">
+      This project is fully open source. You can audit every line of code on{' '}
+      <a
+        href={rc.repoUrl}
+        target="_blank"
+        rel="noopener"
+        class="text-[var(--color-accent)] hover:underline">GitHub</a
+      > to verify these claims independently.
+    </p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">7. Changes to This Policy</h2>
+    <p class="mb-4">
+      Any updates to this policy will be reflected on this page with a revised date. Significant
+      changes will also be noted in the repository changelog.
+    </p>
+
+    <h2 class="text-slate-100 text-xl font-semibold mt-8 mb-4">8. Contact</h2>
+    <p class="mb-4">
+      For questions or concerns, please open an issue on the{' '}
+      <a
+        href={rc.repoUrl}
+        target="_blank"
+        rel="noopener"
+        class="text-[var(--color-accent)] hover:underline">GitHub repository</a
+      >.
+    </p>
+
+    <div class="mt-12 pt-6 border-t border-[#2e2e3a] text-center text-slate-500">
+      <p>{SITE.author.copyright}</p>
+      <p class="mt-2">
+        <a href="/remote-control/terms" class="text-[var(--color-accent)] hover:underline"
+          >Terms of Use</a
+        >
+      </p>
+    </div>
+  </div>
+</Layout>

@@ -31,6 +31,17 @@ export const SITE = {
       repoUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows',
       licenseUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows/blob/main/LICENSE',
     },
+    {
+      name: 'Remote Control',
+      description:
+        'Wake up your PC from anywhere using an Arduino, MQTT cloud messaging, and a simple mobile interface. No port forwarding required.',
+      icon: '🎮',
+      tags: ['Arduino', 'IoT', 'MQTT', 'Wake on LAN'],
+      pageUrl: '/remote-control/',
+      repoUrl: 'https://github.com/onurcakmakceng/arduino-wake-on-lan-cloudmq',
+      licenseUrl:
+        'https://github.com/onurcakmakceng/arduino-wake-on-lan-cloudmq/blob/main/LICENSE',
+    },
   ],
 } as const;
 

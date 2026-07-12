@@ -1,0 +1,296 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../site.config';
+
+const rc = SITE.projects[1];
+---
+
+<Layout
+  title="Remote Control - Wake Your PC from Anywhere"
+  description="Wake up your PC from anywhere using an Arduino, MQTT cloud messaging, and a simple mobile interface. No port forwarding required."
+  theme="rc"
+>
+  <div class="max-w-[1100px] mx-auto px-6 relative z-10">
+    <nav class="py-6 flex justify-between items-center">
+      <a
+        href="/"
+        class="flex items-center gap-3 text-slate-100 no-underline hover:opacity-80 transition-opacity"
+      >
+        <span class="text-[1.8rem]">🎮</span>
+        <span class="text-xl font-semibold">Remote Control</span>
+      </a>
+      <ul class="hidden md:flex gap-6 list-none">
+        <li>
+          <a href="#how-it-works" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >How It Works</a
+          >
+        </li>
+        <li>
+          <a href="#features" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Features</a
+          >
+        </li>
+        <li>
+          <a
+            href={rc.repoUrl}
+            target="_blank"
+            rel="noopener"
+            class="text-slate-400 text-sm hover:text-slate-100 transition-colors">GitHub</a
+          >
+        </li>
+      </ul>
+    </nav>
+
+    <section class="pt-20 pb-16 text-center">
+      <div
+        class="inline-flex items-center gap-2 px-4 py-2 bg-[#26262e] border border-[#2e2e3a] rounded-full text-[0.85rem] text-slate-400 mb-6"
+      >
+        📡 Arduino + MQTT · No port forwarding needed
+      </div>
+      <h1 class="text-[clamp(2.2rem,5vw,3.5rem)] font-bold leading-tight mb-5">
+        Wake your PC <span class="gradient-text">from anywhere</span>
+      </h1>
+      <p class="text-lg text-slate-400 max-w-[600px] mx-auto mb-10 leading-relaxed">
+        An Arduino-powered Wake on LAN solution that uses MQTT cloud messaging to turn on your
+        computer remotely — without exposing any ports to the internet.
+      </p>
+      <div class="flex gap-4 justify-center flex-wrap mb-16">
+        <a
+          href={rc.repoUrl}
+          target="_blank"
+          rel="noopener"
+          class="gradient-bg inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium text-white shadow-[0_4px_20px_rgba(16,185,129,0.3)] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(16,185,129,0.4)] transition-all"
+        >
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"
+            ></path>
+          </svg>
+          View on GitHub
+        </a>
+        <a
+          href="#how-it-works"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-xl text-base font-medium bg-[#26262e] border border-[#2e2e3a] text-slate-100 hover:bg-[#202027] hover:border-[var(--color-accent)] transition-all"
+        >
+          How It Works
+        </a>
+      </div>
+
+      <div
+        class="max-w-[600px] mx-auto rounded-2xl overflow-hidden border border-[#2e2e3a] hero-image-glow bg-[#202027] p-10"
+      >
+        <div class="flex flex-col items-center gap-6">
+          <div class="flex items-center gap-6">
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-16 h-16 bg-[#26262e] rounded-2xl flex items-center justify-center text-3xl border border-[#2e2e3a]">📱</div>
+              <span class="text-xs text-slate-500 font-mono">Phone</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <div class="text-[var(--color-accent)] text-sm font-mono">MQTT</div>
+              <div class="w-16 border-t border-dashed border-[var(--color-accent)] opacity-60"></div>
+              <div class="text-[var(--color-accent)] text-sm font-mono">Cloud</div>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-16 h-16 bg-[#26262e] rounded-2xl flex items-center justify-center text-3xl border border-[#2e2e3a]">📡</div>
+              <span class="text-xs text-slate-500 font-mono">Arduino</span>
+            </div>
+            <div class="flex flex-col items-center gap-1">
+              <div class="text-[var(--color-accent)] text-sm font-mono">WoL</div>
+              <div class="w-10 border-t border-dashed border-[var(--color-accent)] opacity-60"></div>
+            </div>
+            <div class="flex flex-col items-center gap-2">
+              <div class="w-16 h-16 bg-[#26262e] rounded-2xl flex items-center justify-center text-3xl border border-[#2e2e3a]">🖥️</div>
+              <span class="text-xs text-slate-500 font-mono">PC</span>
+            </div>
+          </div>
+          <p class="text-slate-500 text-sm font-mono">Tap → Publish → Receive → Wake</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 border-t border-[#2e2e3a]" id="how-it-works">
+      <div class="text-center mb-12">
+        <h2 class="text-[2rem] font-bold mb-3">How It Works</h2>
+        <p class="text-slate-400">Four components, zero port forwarding</p>
+      </div>
+      <div class="flex justify-center gap-6 flex-wrap">
+        {
+          [
+            {
+              icon: '📱',
+              title: 'Send Command',
+              desc: 'Publish a message from your phone via any MQTT client',
+              highlight: false,
+            },
+            {
+              icon: '☁️',
+              title: 'Cloud Broker',
+              desc: 'CloudMQTT relays the message securely',
+              highlight: true,
+            },
+            {
+              icon: '📡',
+              title: 'Arduino Receives',
+              desc: 'Arduino subscribed to the topic wakes up',
+              highlight: false,
+            },
+            {
+              icon: '🖥️',
+              title: 'PC Powers On',
+              desc: 'Magic packet sent over local network via WoL',
+              highlight: false,
+            },
+          ].map(({ icon, title, desc, highlight }, i, arr) => (
+            <>
+              <div class="text-center max-w-[180px]">
+                <div
+                  class={`w-20 h-20 bg-[#26262e] border-2 rounded-2xl flex items-center justify-center text-[2rem] mx-auto mb-3 ${highlight ? 'step-highlight' : 'border-[#2e2e3a]'}`}
+                >
+                  {icon}
+                </div>
+                <h3 class="text-sm font-semibold mb-1">{title}</h3>
+                <p class="text-slate-400 text-xs">{desc}</p>
+              </div>
+              {i < arr.length - 1 && (
+                <div class="hidden md:flex items-center text-[var(--color-accent)] text-2xl pt-5">
+                  →
+                </div>
+              )}
+            </>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="py-16 border-t border-[#2e2e3a]" id="features">
+      <div class="text-center mb-12">
+        <h2 class="text-[2rem] font-bold mb-3">Features</h2>
+        <p class="text-slate-400">Simple by design, reliable by build</p>
+      </div>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(280px,1fr))] gap-5">
+        {
+          [
+            {
+              icon: '🔒',
+              title: 'No Port Forwarding',
+              desc: 'Uses MQTT cloud broker — your router never needs to be exposed to the internet.',
+            },
+            {
+              icon: '📡',
+              title: 'Arduino Powered',
+              desc: 'Runs on any Arduino with an Ethernet or Wi-Fi shield, always-on and low power.',
+            },
+            {
+              icon: '☁️',
+              title: 'MQTT Cloud',
+              desc: 'Built on CloudMQTT for reliable pub/sub messaging across any network.',
+            },
+            {
+              icon: '🖥️',
+              title: 'Wake on LAN',
+              desc: 'Sends the IEEE 802 magic packet directly on the local network to wake your PC.',
+            },
+            {
+              icon: '📱',
+              title: 'Any MQTT Client',
+              desc: 'Works with any MQTT app on iOS or Android — no custom app required.',
+            },
+            {
+              icon: '⚡',
+              title: 'Instant Response',
+              desc: 'Latency is just the MQTT round-trip — typically under a second.',
+            },
+          ].map(({ icon, title, desc }) => (
+            <div class="bg-[#202027] border border-[#2e2e3a] rounded-2xl p-6 hover:border-[var(--color-accent)] hover:-translate-y-0.5 transition-all">
+              <div class="text-[2rem] mb-3">{icon}</div>
+              <h3 class="text-lg font-semibold mb-2">{title}</h3>
+              <p class="text-slate-400 text-sm leading-relaxed">{desc}</p>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="py-12 border-t border-[#2e2e3a]" id="stack">
+      <div class="text-center mb-10">
+        <h2 class="text-[2rem] font-bold mb-3">Tech Stack</h2>
+        <p class="text-slate-400">Hardware meets cloud</p>
+      </div>
+      <div class="flex justify-center gap-8 flex-wrap">
+        {
+          [
+            ['📟', 'Arduino'],
+            ['☁️', 'CloudMQTT'],
+            ['🌐', 'Ethernet / Wi-Fi'],
+            ['📦', 'WoL Protocol'],
+            ['📱', 'MQTT Client'],
+          ].map(([icon, name]) => (
+            <div class="flex flex-col items-center gap-2 text-slate-400 text-sm">
+              <span class="text-[2.5rem]">{icon}</span>
+              <span>{name}</span>
+            </div>
+          ))
+        }
+      </div>
+    </section>
+
+    <section class="py-12 border-t border-[#2e2e3a]" id="legal">
+      <h2 class="text-[2rem] font-bold mb-8 text-center">Legal</h2>
+      <div class="grid grid-cols-[repeat(auto-fit,minmax(240px,1fr))] gap-5">
+        <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-5">
+          <h3 class="text-base font-semibold mb-2">📜 Terms of Use</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-3">
+            By using this project, you agree to our terms including our disclaimer of liability.
+          </p>
+          <a
+            href="/remote-control/terms"
+            class="text-[var(--color-accent)] text-sm font-medium hover:underline">Read Terms →</a
+          >
+        </div>
+        <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-5">
+          <h3 class="text-base font-semibold mb-2">🔒 Privacy Policy</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-3">
+            This project runs on your own hardware and your chosen MQTT broker. We collect no data.
+          </p>
+          <a
+            href="/remote-control/privacy"
+            class="text-[var(--color-accent)] text-sm font-medium hover:underline"
+            >Read Privacy Policy →</a
+          >
+        </div>
+        <div class="bg-[#202027] border border-[#2e2e3a] rounded-xl p-5">
+          <h3 class="text-base font-semibold mb-2">⚖️ License</h3>
+          <p class="text-slate-400 text-sm leading-relaxed mb-3">
+            Open source. Check the repository for license details.
+          </p>
+          <a
+            href={rc.licenseUrl}
+            target="_blank"
+            rel="noopener"
+            class="text-[var(--color-accent)] text-sm font-medium hover:underline">View License →</a
+          >
+        </div>
+      </div>
+    </section>
+
+    <footer class="py-10 border-t border-[#2e2e3a] text-center">
+      <div class="flex justify-center gap-6 mb-4 flex-wrap text-sm">
+        <a href="/" class="text-slate-500 hover:text-slate-100 transition-colors">Home</a>
+        <a
+          href={rc.repoUrl}
+          target="_blank"
+          rel="noopener"
+          class="text-slate-500 hover:text-slate-100 transition-colors">GitHub</a
+        >
+        <a href="/remote-control/terms" class="text-slate-500 hover:text-slate-100 transition-colors"
+          >Terms</a
+        >
+        <a
+          href="/remote-control/privacy"
+          class="text-slate-500 hover:text-slate-100 transition-colors">Privacy</a
+        >
+      </div>
+      <p class="text-slate-600 text-sm">{SITE.author.copyright}</p>
+    </footer>
+  </div>
+</Layout>
