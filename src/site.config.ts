@@ -100,16 +100,6 @@ export const SITE = {
       description: 'ICT systems with C#, .NET Core, RESTful services, SignalR, and SQL Server.',
     },
     {
-      type: 'work',
-      title: 'Software Engineer',
-      organization: 'HAVELSAN',
-      organizationUrl: 'https://www.linkedin.com/company/havelsan/',
-      location: 'Ankara, Turkey',
-      start: 'Jan 2017',
-      end: 'Aug 2017',
-      description: 'SIEM project development with Java, Spring Boot, Hadoop, Kafka, and AngularJS.',
-    },
-    {
       type: 'education',
       title: 'B.S. Computer Engineering',
       organization: 'Hacettepe University',
