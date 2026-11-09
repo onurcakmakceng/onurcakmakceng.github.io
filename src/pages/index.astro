@@ -20,18 +20,18 @@ import { GitHubIcon, LinkedInIcon } from '../components/icons';
           >
         </li>
         <li>
+          <a href="#bookmarks" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Bookmarks</a
+          >
+        </li>
+        <li>
           <a href="#projects" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
-            >Projects</a
+            >Side Projects</a
           >
         </li>
         <li>
-          <a href="#reading" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
-            >Reading</a
-          >
-        </li>
-        <li>
-          <a href="#writing" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
-            >Writing</a
+          <a href="#articles" class="text-slate-400 text-sm hover:text-slate-100 transition-colors"
+            >Articles</a
           >
         </li>
         <li>
@@ -73,7 +73,7 @@ import { GitHubIcon, LinkedInIcon } from '../components/icons';
             <span class="gradient-text">{SITE.author.name}</span>
           </h1>
           <p class="text-lg text-slate-400 leading-relaxed mb-6">
-            Senior Software Engineer with +7 years of experience, specializing in Back-End
+            Senior Software Engineer with 8+ years of experience, specializing in Back-End
             technologies. Expertise in Java, Python, C#, Cloud Technologies alongside hands-on
             experience in React and Unity. Focused on delivering quality and the best products for
             people. Motivated by seeing users.
@@ -104,29 +104,21 @@ import { GitHubIcon, LinkedInIcon } from '../components/icons';
 
     <section class="py-14 border-t border-[#2e2e3a]" id="experience">
       <SectionHeader
-        label="Career"
         title="Experience"
         linkHref={SITE.social.linkedin}
-        linkText="Full profile on LinkedIn →"
+        linkText="Full profile"
+        linkIcon={LinkedInIcon}
         description="8+ years building software across defense, gaming, startups, and AI."
       />
       <CareerTimeline entries={SITE.career} />
     </section>
 
-    <section class="py-14 border-t border-[#2e2e3a]" id="projects">
-      <SectionHeader label="Open Source" title="Side Projects" />
-      <div class="grid grid-cols-[repeat(auto-fill,minmax(300px,380px))] gap-5">
-        {SITE.projects.map((project) => <ProjectCard project={project} />)}
-      </div>
-    </section>
-
-    <section class="py-14 border-t border-[#2e2e3a]" id="reading">
+    <section class="py-14 border-t border-[#2e2e3a]" id="bookmarks">
       <SectionHeader
-        label="Reading"
         title="Bookmarks"
         linkHref={SITE.social.raindrop}
         linkText="View all →"
-        description="Links I've saved — CS fundamentals, tools, games, and more."
+        description="Links I've saved: CS fundamentals, tools, games, and more."
       />
       <div class="rounded-2xl overflow-hidden border border-[#2e2e3a] bg-[#202027]">
         <iframe
@@ -139,13 +131,15 @@ import { GitHubIcon, LinkedInIcon } from '../components/icons';
       </div>
     </section>
 
-    <section class="py-14 border-t border-[#2e2e3a]" id="writing">
-      <SectionHeader
-        label="Writing"
-        title="Articles"
-        linkHref={SITE.social.medium}
-        linkText="All on Medium →"
-      />
+    <section class="py-14 border-t border-[#2e2e3a]" id="projects">
+      <SectionHeader title="Side Projects" />
+      <div class="grid grid-cols-[repeat(auto-fill,minmax(300px,380px))] gap-5">
+        {SITE.projects.map((project) => <ProjectCard project={project} />)}
+      </div>
+    </section>
+
+    <section class="py-14 border-t border-[#2e2e3a]" id="articles">
+      <SectionHeader title="Articles" linkHref={SITE.social.medium} linkText="All on Medium →" />
       <MediumPosts client:load />
     </section>
 

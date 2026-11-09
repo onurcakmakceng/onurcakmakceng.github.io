@@ -1,26 +1,32 @@
+import type { ComponentType } from 'react';
+
 interface Props {
-  label: string;
   title: string;
   description?: string;
   linkHref?: string;
   linkText?: string;
+  linkIcon?: ComponentType<{ size?: number }>;
 }
 
-export default function SectionHeader({ label, title, description, linkHref, linkText }: Props) {
+export default function SectionHeader({
+  title,
+  description,
+  linkHref,
+  linkText,
+  linkIcon: LinkIcon,
+}: Props) {
   return (
     <div className="mb-8">
-      <p className="font-mono text-xs text-[var(--color-accent)] uppercase tracking-widest mb-1">
-        {label}
-      </p>
       <div className="flex items-end justify-between">
         <h2 className="text-2xl font-bold">{title}</h2>
         {linkHref && linkText && (
           <a
             href={linkHref}
             target="_blank"
-            rel="noopener"
-            className="text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-slate-500 hover:text-[var(--color-accent)] transition-colors"
           >
+            {LinkIcon && <LinkIcon size={14} />}
             {linkText}
           </a>
         )}
