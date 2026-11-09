@@ -1,5 +1,4 @@
 import { useEffect, useId, useRef, useState } from 'react';
-import { GitHubIcon, LinkedInIcon } from './icons';
 
 interface MenuLink {
   href: string;
@@ -8,8 +7,6 @@ interface MenuLink {
 
 interface Props {
   links: readonly MenuLink[];
-  linkedinUrl: string;
-  githubUrl: string;
 }
 
 function MenuIcon({ open }: { open: boolean }) {
@@ -40,7 +37,7 @@ function MenuIcon({ open }: { open: boolean }) {
   );
 }
 
-export default function SiteMenu({ links, linkedinUrl, githubUrl }: Props) {
+export default function SiteMenu({ links }: Props) {
   const [isOpen, setIsOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
   const panelId = useId();
@@ -96,28 +93,6 @@ export default function SiteMenu({ links, linkedinUrl, githubUrl }: Props) {
               </li>
             ))}
           </ul>
-          <div className="mt-2 flex gap-1 border-t border-[#2e2e3a] pt-2">
-            <a
-              href={linkedinUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={close}
-              aria-label="LinkedIn"
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-[#26262e] hover:text-slate-100 transition-colors"
-            >
-              <LinkedInIcon />
-            </a>
-            <a
-              href={githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={close}
-              aria-label="GitHub"
-              className="flex h-9 w-9 items-center justify-center rounded-lg text-slate-400 hover:bg-[#26262e] hover:text-slate-100 transition-colors"
-            >
-              <GitHubIcon />
-            </a>
-          </div>
         </div>
       )}
     </div>

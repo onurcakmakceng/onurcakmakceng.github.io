@@ -6,6 +6,7 @@ import ProjectCard from '../components/ProjectCard';
 import MediumPosts from '../components/MediumPosts';
 import CareerTimeline from '../components/CareerTimeline';
 import SiteMenu from '../components/SiteMenu';
+import HeaderSocialLinks from '../components/HeaderSocialLinks';
 import { GitHubIcon, LinkedInIcon } from '../components/icons';
 
 const MENU_LINKS = [
@@ -24,13 +25,14 @@ const MENU_LINKS = [
       <a href="#top" class="hidden md:inline gradient-text text-xl font-bold tracking-tight"
         >{SITE.name}</a
       >
-      <div class="ml-auto">
-        <SiteMenu
+      <div class="ml-auto flex items-center gap-1">
+        <HeaderSocialLinks
           client:load
-          links={MENU_LINKS}
           linkedinUrl={SITE.social.linkedin}
           githubUrl={SITE.social.github}
+          revealAfterElementId="hero-social-links"
         />
+        <SiteMenu client:load links={MENU_LINKS} />
       </div>
     </nav>
 
@@ -53,7 +55,7 @@ const MENU_LINKS = [
             experience in React and Unity. Focused on delivering quality and the best products for
             people. Motivated by seeing users.
           </p>
-          <div class="flex gap-3 flex-wrap">
+          <div id="hero-social-links" class="flex gap-3 flex-wrap">
             <a
               href={SITE.social.linkedin}
               target="_blank"

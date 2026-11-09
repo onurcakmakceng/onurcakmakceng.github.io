@@ -1,3 +1,24 @@
+export const BOOKMARK_ALL_WINDOWS = {
+  name: 'Bookmark All Windows',
+  description:
+    'A browser extension that saves all tabs from all open windows into organized bookmark folders with a single click.',
+  icon: '📚',
+  tags: ['Chrome Extension'],
+  pageUrl: '/bookmark-all-windows/',
+  repoUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows',
+  licenseUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows/blob/main/LICENSE',
+} as const;
+
+export const ANTEON = {
+  name: 'Anteon (formerly Ddosify)',
+  description:
+    'Co-founded open-source eBPF-based Kubernetes monitoring and performance testing platform with 8.5K+ GitHub stars.',
+  icon: '🐜',
+  tags: ['Go', 'Kubernetes', 'eBPF', 'Load Testing'],
+  websiteUrl: 'https://getanteon.com',
+  repoUrl: 'https://github.com/getanteon/anteon',
+} as const;
+
 export const SITE = {
   name: 'Onur Cakmak',
   title: 'Onur Cakmak',
@@ -97,27 +118,7 @@ export const SITE = {
     },
   ],
 
-  projects: [
-    {
-      name: 'Bookmark All Windows',
-      description:
-        'A browser extension that saves all tabs from all open windows into organized bookmark folders with a single click.',
-      icon: '📚',
-      tags: ['Chrome Extension'],
-      pageUrl: '/bookmark-all-windows/',
-      repoUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows',
-      licenseUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows/blob/main/LICENSE',
-    },
-    {
-      name: 'Anteon (formerly Ddosify)',
-      description:
-        'Co-founded open-source eBPF-based Kubernetes monitoring and performance testing platform with 8.5K+ GitHub stars.',
-      icon: '🐜',
-      tags: ['Go', 'Kubernetes', 'eBPF', 'Load Testing'],
-      websiteUrl: 'https://getanteon.com',
-      repoUrl: 'https://github.com/getanteon/anteon',
-    },
-  ],
+  projects: [ANTEON, BOOKMARK_ALL_WINDOWS],
 } as const;
 
 export const MEDIUM_RSS = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://medium.com/feed/@onurcakmak')}`;
