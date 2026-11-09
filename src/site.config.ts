@@ -48,6 +48,10 @@ export const SITE = {
       title: 'Senior Software Engineer',
       organization: 'Metaphysic.ai',
       organizationUrl: 'https://www.linkedin.com/company/metaphysic-ai/',
+      currentOrganization: {
+        name: 'Brahma AI',
+        url: 'https://www.linkedin.com/company/brahmaai/',
+      },
       location: 'London, United Kingdom',
       start: 'Jul 2023',
       end: null,

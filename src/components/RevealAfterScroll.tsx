@@ -16,8 +16,11 @@ export default function RevealAfterScroll({ targetId, className = '', children }
     if (!target) return;
 
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        const hasScrolledPast = !entry.isIntersecting && entry.boundingClientRect.top < 0;
+      (entries) => {
+        const latestEntry = entries[entries.length - 1];
+        const observedAreaTop = latestEntry.rootBounds?.top ?? 0;
+        const hasScrolledPast =
+          !latestEntry.isIntersecting && latestEntry.boundingClientRect.top < observedAreaTop;
         setIsVisible(hasScrolledPast);
       },
       { rootMargin: `-${STICKY_HEADER_OFFSET_PX}px 0px 0px 0px` }
