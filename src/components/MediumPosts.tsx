@@ -4,6 +4,7 @@ import { ADDITIONAL_ARTICLES, MEDIUM_RSS, SITE } from '../site.config';
 const FEED_POST_LIMIT = 5;
 const WORDS_PER_MINUTE = 200;
 const DESCRIPTION_LENGTH = 140;
+const TRACKING_PIXEL_PATTERN = /medium\.com\/_\/stat/;
 
 interface MediumFeedItem {
   title: string;
@@ -52,6 +53,13 @@ function truncateAtWord(text: string, maxLength: number): string {
   return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\s.,;:]+$/, '')}…`;
 }
 
+function firstContentImage(content?: string): string | undefined {
+  const imageSources = [...(content ?? '').matchAll(/<img[^>]+src="([^"]+)"/g)].map(
+    ([, src]) => src
+  );
+  return imageSources.find((src) => !TRACKING_PIXEL_PATTERN.test(src));
+}
+
 function canonicalLink(link: string): string {
   return link.split('?')[0].replace(/\/$/, '');
 }
@@ -61,7 +69,7 @@ function fromFeedItem(item: MediumFeedItem): Article {
     title: item.title,
     link: item.link,
     publishedAt: item.pubDate,
-    thumbnail: item.thumbnail || item.enclosure?.link,
+    thumbnail: item.thumbnail || item.enclosure?.link || firstContentImage(item.content),
     description: truncateAtWord(stripHtml(item.description), DESCRIPTION_LENGTH),
     readTimeMinutes: estimateReadTime(item.content),
   };
