@@ -125,4 +125,18 @@ export const SITE = {
   projects: [ANTEON, BOOKMARK_ALL_WINDOWS],
 } as const;
 
+export const ADDITIONAL_ARTICLES = [
+  {
+    title: 'Partial Response on REST Endpoints',
+    link: 'https://medium.com/trendyol-tech/partial-response-on-rest-endpoints-e2acf9271f06',
+    publishedAt: '2023-06-20',
+    thumbnail: 'https://miro.medium.com/v2/resize:fit:400/1*qrHC9Rl1QGhjJZlKUQ5s5g.png',
+    description:
+      'How Trendyol Search lets clients fetch only the fields they need from a single REST endpoint, and why we chose partial response over GraphQL.',
+    readTimeMinutes: 5,
+    publication: 'Trendyol Tech',
+    isCoAuthored: true,
+  },
+] as const;
+
 export const MEDIUM_RSS = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent('https://medium.com/feed/@onurcakmak')}`;

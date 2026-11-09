@@ -1,7 +1,11 @@
 import { useState, useEffect } from 'react';
-import { MEDIUM_RSS } from '../site.config';
+import { ADDITIONAL_ARTICLES, MEDIUM_RSS, SITE } from '../site.config';
 
-interface MediumPost {
+const FEED_POST_LIMIT = 5;
+const WORDS_PER_MINUTE = 200;
+const DESCRIPTION_LENGTH = 140;
+
+interface MediumFeedItem {
   title: string;
   link: string;
   pubDate: string;
@@ -11,16 +15,67 @@ interface MediumPost {
   enclosure?: { link?: string };
 }
 
-type State =
-  { status: 'loading' } | { status: 'error' } | { status: 'success'; posts: MediumPost[] };
-
-function estimateReadTime(content?: string): number {
-  const wordCount = content?.replace(/<[^>]*>/g, '').split(/\s+/).length ?? 300;
-  return Math.max(1, Math.round(wordCount / 200));
+interface Article {
+  title: string;
+  link: string;
+  publishedAt: string;
+  thumbnail?: string;
+  description: string;
+  readTimeMinutes: number;
+  publication?: string;
+  isCoAuthored?: boolean;
 }
 
+type State =
+  | { status: 'loading' }
+  | { status: 'error'; articles: Article[] }
+  | { status: 'success'; articles: Article[] };
+
 function stripHtml(html?: string): string {
-  return html?.replace(/<[^>]*>/g, '') ?? '';
+  return (
+    html
+      ?.replace(/<[^>]*>/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim() ?? ''
+  );
+}
+
+function estimateReadTime(content?: string): number {
+  const wordCount = stripHtml(content).split(/\s+/).filter(Boolean).length || 300;
+  return Math.max(1, Math.round(wordCount / WORDS_PER_MINUTE));
+}
+
+function truncateAtWord(text: string, maxLength: number): string {
+  if (text.length <= maxLength) return text;
+  const cut = text.slice(0, maxLength);
+  const lastSpace = cut.lastIndexOf(' ');
+  return `${(lastSpace > 0 ? cut.slice(0, lastSpace) : cut).replace(/[\s.,;:]+$/, '')}…`;
+}
+
+function canonicalLink(link: string): string {
+  return link.split('?')[0].replace(/\/$/, '');
+}
+
+function fromFeedItem(item: MediumFeedItem): Article {
+  return {
+    title: item.title,
+    link: item.link,
+    publishedAt: item.pubDate,
+    thumbnail: item.thumbnail || item.enclosure?.link,
+    description: truncateAtWord(stripHtml(item.description), DESCRIPTION_LENGTH),
+    readTimeMinutes: estimateReadTime(item.content),
+  };
+}
+
+function mergeArticles(feedArticles: Article[], additionalArticles: readonly Article[]): Article[] {
+  const articlesByLink = new Map<string, Article>();
+  for (const article of [...additionalArticles, ...feedArticles]) {
+    const key = canonicalLink(article.link);
+    if (!articlesByLink.has(key)) articlesByLink.set(key, article);
+  }
+  return [...articlesByLink.values()].sort(
+    (a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime()
+  );
 }
 
 function PostSkeleton() {
@@ -36,27 +91,30 @@ function PostSkeleton() {
   );
 }
 
-function PostCard({ post }: { post: MediumPost }) {
-  const thumbnail = post.thumbnail || post.enclosure?.link || null;
-  const date = new Date(post.pubDate).toLocaleDateString('en-US', {
+function ArticleCard({ article }: { article: Article }) {
+  const date = new Date(article.publishedAt).toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'short',
     day: 'numeric',
   });
-  const readTime = estimateReadTime(post.content);
-  const description = stripHtml(post.description).slice(0, 140);
+  const metadata = [
+    date,
+    `${article.readTimeMinutes} min read`,
+    article.isCoAuthored && 'Co-authored',
+    article.publication,
+  ].filter(Boolean);
 
   return (
     <a
-      href={post.link}
+      href={article.link}
       target="_blank"
-      rel="noopener"
+      rel="noopener noreferrer"
       className="group flex gap-4 p-4 bg-[#26262e] border border-[#2e2e3a] rounded-xl hover:border-[var(--color-accent)] hover:-translate-y-0.5 transition-all"
     >
-      {thumbnail && (
+      {article.thumbnail && (
         <img
-          src={thumbnail}
-          alt={post.title}
+          src={article.thumbnail}
+          alt={article.title}
           className="w-20 h-20 rounded-lg object-cover shrink-0 bg-[#202027]"
           loading="lazy"
           onError={(e) => {
@@ -66,12 +124,12 @@ function PostCard({ post }: { post: MediumPost }) {
       )}
       <div className="min-w-0 flex-1">
         <h3 className="font-semibold text-slate-100 group-hover:text-[var(--color-accent)] transition-colors leading-snug mb-1 line-clamp-2">
-          {post.title}
+          {article.title}
         </h3>
-        <p className="text-sm text-slate-500 leading-relaxed line-clamp-2 mb-2">{description}...</p>
-        <span className="text-xs text-slate-600 font-mono">
-          {date} · {readTime} min read
-        </span>
+        <p className="text-sm text-slate-500 leading-relaxed line-clamp-2 mb-2">
+          {article.description}
+        </p>
+        <span className="text-xs text-slate-600 font-mono">{metadata.join(' · ')}</span>
       </div>
     </a>
   );
@@ -84,35 +142,38 @@ export default function MediumPosts() {
     fetch(MEDIUM_RSS)
       .then((res) => res.json())
       .then((data) => {
-        if (data.status !== 'ok' || !data.items?.length) throw new Error();
-        setState({ status: 'success', posts: data.items.slice(0, 5) });
+        if (data.status !== 'ok' || !Array.isArray(data.items)) throw new Error();
+        const feedArticles = (data.items as MediumFeedItem[])
+          .slice(0, FEED_POST_LIMIT)
+          .map(fromFeedItem);
+        setState({
+          status: 'success',
+          articles: mergeArticles(feedArticles, ADDITIONAL_ARTICLES),
+        });
       })
-      .catch(() => setState({ status: 'error' }));
+      .catch(() => setState({ status: 'error', articles: mergeArticles([], ADDITIONAL_ARTICLES) }));
   }, []);
 
   if (state.status === 'loading') return <PostSkeleton />;
 
-  if (state.status === 'error') {
-    return (
-      <p className="text-slate-500 text-sm">
-        Couldn't load articles.{' '}
-        <a
-          href="https://medium.com/@onurcakmak"
-          target="_blank"
-          rel="noopener"
-          className="text-[var(--color-accent)] hover:underline"
-        >
-          Read on Medium →
-        </a>
-      </p>
-    );
-  }
-
   return (
     <div className="flex flex-col gap-4">
-      {state.posts.map((post) => (
-        <PostCard key={post.link} post={post} />
+      {state.articles.map((article) => (
+        <ArticleCard key={article.link} article={article} />
       ))}
+      {state.status === 'error' && (
+        <p className="text-slate-500 text-sm">
+          Couldn't load the latest articles.{' '}
+          <a
+            href={SITE.social.medium}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-[var(--color-accent)] hover:underline"
+          >
+            Read on Medium →
+          </a>
+        </p>
+      )}
     </div>
   );
 }

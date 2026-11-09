@@ -96,18 +96,14 @@ export default function CareerTimeline({ entries }: { entries: readonly CareerEn
                     <span className="text-sm text-slate-400">{entry.organization}</span>
                   )}
                   {entry.currentOrganization && (
-                    <span className="text-sm text-slate-500">
-                      (
-                      <a
-                        href={entry.currentOrganization.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors"
-                      >
-                        {entry.currentOrganization.name}
-                      </a>
-                      )
-                    </span>
+                    <a
+                      href={entry.currentOrganization.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors"
+                    >
+                      ({entry.currentOrganization.name})
+                    </a>
                   )}
                 </div>
                 <span className="shrink-0 font-mono text-xs text-slate-500 whitespace-nowrap mt-0.5 sm:mt-0">
