@@ -13,7 +13,7 @@ export const ANTEON = {
   name: 'Anteon (formerly Ddosify)',
   description:
     'Co-founded open-source eBPF-based Kubernetes monitoring and performance testing platform with 8.5K+ GitHub stars.',
-  icon: '🐜',
+  logoUrl: 'https://avatars.githubusercontent.com/u/75415501?s=88&v=4',
   tags: ['Go', 'Kubernetes', 'eBPF', 'Load Testing'],
   websiteUrl: 'https://getanteon.com',
   repoUrl: 'https://github.com/getanteon/anteon',

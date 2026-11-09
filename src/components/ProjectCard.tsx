@@ -3,7 +3,8 @@ import { ExternalLinkIcon, GitHubIcon } from './icons';
 interface Project {
   name: string;
   description: string;
-  icon: string;
+  icon?: string;
+  logoUrl?: string;
   tags: readonly string[];
   repoUrl: string;
   pageUrl?: string;
@@ -36,8 +37,19 @@ export default function ProjectCard({ project }: { project: Project }) {
         className="absolute inset-0 z-0"
         aria-label={`View ${project.name}`}
       />
-      <div className="w-11 h-11 bg-[#202027] rounded-xl flex items-center justify-center text-2xl mb-4">
-        {project.icon}
+      <div className="w-11 h-11 bg-[#202027] rounded-xl flex items-center justify-center text-2xl mb-4 overflow-hidden">
+        {project.logoUrl ? (
+          <img
+            src={project.logoUrl}
+            alt={`${project.name} logo`}
+            width={44}
+            height={44}
+            loading="lazy"
+            className="h-full w-full object-cover"
+          />
+        ) : (
+          project.icon
+        )}
       </div>
       <h3 className="text-lg font-semibold mb-2">{project.name}</h3>
       <p className="text-slate-400 text-sm leading-relaxed mb-4">{project.description}</p>

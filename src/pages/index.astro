@@ -6,7 +6,7 @@ import ProjectCard from '../components/ProjectCard';
 import MediumPosts from '../components/MediumPosts';
 import CareerTimeline from '../components/CareerTimeline';
 import SiteMenu from '../components/SiteMenu';
-import HeaderSocialLinks from '../components/HeaderSocialLinks';
+import RevealAfterScroll from '../components/RevealAfterScroll';
 import { GitHubIcon, LinkedInIcon } from '../components/icons';
 
 const MENU_LINKS = [
@@ -22,16 +22,34 @@ const MENU_LINKS = [
     <nav
       class="sticky top-0 z-50 -mx-6 px-6 py-4 flex items-center justify-between bg-[#18181c]/80 backdrop-blur-md"
     >
-      <a href="#top" class="hidden md:inline gradient-text text-xl font-bold tracking-tight"
-        >{SITE.name}</a
-      >
+      <RevealAfterScroll client:load targetId="hero-social-links">
+        <a href="#top" class="gradient-text text-xl font-bold tracking-tight">{SITE.name}</a>
+      </RevealAfterScroll>
       <div class="ml-auto flex items-center gap-1">
-        <HeaderSocialLinks
+        <RevealAfterScroll
           client:load
-          linkedinUrl={SITE.social.linkedin}
-          githubUrl={SITE.social.github}
-          revealAfterElementId="hero-social-links"
-        />
+          targetId="hero-social-links"
+          className="flex items-center gap-1"
+        >
+          <a
+            href={SITE.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn"
+            class="flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 hover:bg-[#26262e] hover:text-slate-100 transition-colors"
+          >
+            <LinkedInIcon />
+          </a>
+          <a
+            href={SITE.social.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub"
+            class="flex h-10 w-10 items-center justify-center rounded-xl text-slate-400 hover:bg-[#26262e] hover:text-slate-100 transition-colors"
+          >
+            <GitHubIcon />
+          </a>
+        </RevealAfterScroll>
         <SiteMenu client:load links={MENU_LINKS} />
       </div>
     </nav>
