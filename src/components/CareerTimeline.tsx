@@ -4,6 +4,7 @@ interface CareerEntry {
   organization: string;
   organizationUrl?: string;
   location?: string;
+  note?: string;
   start: string;
   end?: string | null;
   description?: string;
@@ -70,41 +71,35 @@ export default function CareerTimeline({ entries }: { entries: readonly CareerEn
                 }`}
               />
 
-              <div className="flex flex-col sm:flex-row sm:items-baseline sm:gap-4">
-                <div className="flex-1 min-w-0">
-                  <div className="flex items-baseline gap-2 flex-wrap">
-                    <h3 className="text-[0.95rem] font-semibold text-slate-100 leading-snug">
-                      {entry.title}
-                    </h3>
-                    <span className="text-slate-600 hidden sm:inline">·</span>
-                    {entry.organizationUrl ? (
-                      <a
-                        href={entry.organizationUrl}
-                        target="_blank"
-                        rel="noopener"
-                        className="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors"
-                      >
-                        {entry.organization}
-                      </a>
-                    ) : (
-                      <span className="text-sm text-slate-400">{entry.organization}</span>
-                    )}
-                  </div>
-                  {entry.location && (
-                    <p className="text-xs text-slate-600 mt-0.5">{entry.location}</p>
+              <div className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                <div className="flex items-baseline gap-2 flex-wrap min-w-0">
+                  <h3 className="text-[0.95rem] font-semibold text-slate-100 leading-snug">
+                    {entry.title}
+                  </h3>
+                  <span className="text-slate-600 hidden sm:inline">·</span>
+                  {entry.organizationUrl ? (
+                    <a
+                      href={entry.organizationUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm text-[var(--color-accent)] hover:text-[var(--color-accent-light)] transition-colors"
+                    >
+                      {entry.organization}
+                    </a>
+                  ) : (
+                    <span className="text-sm text-slate-400">{entry.organization}</span>
                   )}
                 </div>
+                <span className="shrink-0 font-mono text-xs text-slate-500 whitespace-nowrap mt-0.5 sm:mt-0">
+                  {formatRange(entry.start, entry.end)}
+                </span>
+              </div>
 
-                <div className="shrink-0 flex items-baseline gap-2 mt-0.5 sm:mt-0">
-                  <span className="font-mono text-xs text-slate-500 whitespace-nowrap">
-                    {formatRange(entry.start, entry.end)}
-                  </span>
-                  {entry.type === 'work' && (
-                    <span className="font-mono text-[0.6rem] text-slate-600 whitespace-nowrap">
-                      ({durationLabel(entry.start, entry.end)})
-                    </span>
-                  )}
-                </div>
+              <div className="flex items-baseline justify-between gap-4 mt-0.5">
+                <span className="text-xs text-slate-600">{entry.location}</span>
+                <span className="shrink-0 font-mono text-[0.65rem] text-slate-600 whitespace-nowrap">
+                  {entry.type === 'work' ? durationLabel(entry.start, entry.end) : entry.note}
+                </span>
               </div>
             </li>
           );

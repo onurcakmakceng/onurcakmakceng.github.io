@@ -48,7 +48,7 @@ export const SITE = {
       title: 'Co-Founder',
       organization: 'Ddosify (Anteon)',
       organizationUrl: 'https://www.linkedin.com/company/getanteon/',
-      location: 'Remote',
+      location: 'Ankara, Turkey',
       start: 'Aug 2021',
       end: 'Aug 2022',
       description:
@@ -89,7 +89,8 @@ export const SITE = {
       title: 'B.S. Computer Engineering',
       organization: 'Hacettepe University',
       organizationUrl: 'https://www.linkedin.com/school/hacettepe-university/',
-      location: 'Ankara, Turkey · GPA 3.62/4.00',
+      location: 'Ankara, Turkey',
+      note: 'GPA 3.62/4.00',
       start: '2013',
       end: '2017',
       description: "Graduated with honors from one of Turkey's top engineering programs.",
