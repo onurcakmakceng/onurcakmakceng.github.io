@@ -5,17 +5,36 @@ interface Project {
   description: string;
   icon: string;
   tags: readonly string[];
-  pageUrl: string;
   repoUrl: string;
+  pageUrl?: string;
+  websiteUrl?: string;
+}
+
+interface PrimaryLink {
+  href: string;
+  label: string;
+  isExternal: boolean;
+}
+
+function resolvePrimaryLink(project: Project): PrimaryLink {
+  if (project.pageUrl) return { href: project.pageUrl, label: 'Project Page', isExternal: false };
+  if (project.websiteUrl) return { href: project.websiteUrl, label: 'Website', isExternal: true };
+  return { href: project.repoUrl, label: 'Repository', isExternal: true };
 }
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const primaryLink = resolvePrimaryLink(project);
+  const externalLinkProps = primaryLink.isExternal
+    ? { target: '_blank', rel: 'noopener noreferrer' }
+    : {};
+
   return (
     <article className="card-accent-line bg-[#26262e] border border-[#2e2e3a] rounded-2xl p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] cursor-pointer">
       <a
-        href={project.pageUrl}
+        href={primaryLink.href}
+        {...externalLinkProps}
         className="absolute inset-0 z-0"
-        aria-label={`View ${project.name} project page`}
+        aria-label={`View ${project.name}`}
       />
       <div className="w-11 h-11 bg-[#202027] rounded-xl flex items-center justify-center text-2xl mb-4">
         {project.icon}
@@ -35,7 +54,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       <div className="flex gap-4">
         <span className="inline-flex items-center gap-1.5 text-[var(--color-accent)] text-sm font-medium">
           <ExternalLinkIcon />
-          Project Page
+          {primaryLink.label}
         </span>
         <a
           href={project.repoUrl}

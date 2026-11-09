@@ -60,14 +60,14 @@ export default function CareerTimeline({ entries }: { entries: readonly CareerEn
           const isCurrent = entry.type === 'work' && !entry.end;
 
           return (
-            <li key={`${entry.organization}-${entry.start}`} className="relative pl-8 py-3 group">
+            <li key={`${entry.organization}-${entry.start}`} className="relative pl-8 py-3">
               <div
                 className={`absolute left-0 top-[18px] z-10 h-[11px] w-[11px] rounded-full border-2 ${
                   isCurrent
                     ? 'border-[var(--color-accent)] bg-[var(--color-accent)] shadow-[0_0_8px_color-mix(in_srgb,var(--color-accent)_50%,transparent)]'
                     : entry.type === 'education'
                       ? 'border-[#64748b] bg-[#64748b]'
-                      : 'border-[#3a3a48] bg-[#26262e] group-hover:border-[var(--color-accent)] transition-colors'
+                      : 'border-[#3a3a48] bg-[#26262e]'
                 }`}
               />
 

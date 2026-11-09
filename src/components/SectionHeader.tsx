@@ -31,7 +31,7 @@ export default function SectionHeader({
           </a>
         )}
       </div>
-      {description && <p className="text-slate-500 text-sm mt-1">{description}</p>}
+      {description && <p className="text-slate-500 text-sm mt-1 max-w-xl">{description}</p>}
     </div>
   );
 }

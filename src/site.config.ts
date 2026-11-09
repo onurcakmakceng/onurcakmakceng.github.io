@@ -108,6 +108,15 @@ export const SITE = {
       repoUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows',
       licenseUrl: 'https://github.com/onurcakmakceng/bookmark-all-windows/blob/main/LICENSE',
     },
+    {
+      name: 'Anteon (formerly Ddosify)',
+      description:
+        'Co-founded open-source eBPF-based Kubernetes monitoring and performance testing platform with 8.5K+ GitHub stars.',
+      icon: '🐜',
+      tags: ['Go', 'Kubernetes', 'eBPF', 'Load Testing'],
+      websiteUrl: 'https://getanteon.com',
+      repoUrl: 'https://github.com/getanteon/anteon',
+    },
   ],
 } as const;
 
