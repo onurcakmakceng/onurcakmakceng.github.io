@@ -40,7 +40,7 @@ export function formatRange(entry: CareerEntry): string {
 
 export function formatDuration(entry: CareerEntry): string {
   const endIndex = entry.end ? toMonthIndex(entry.end) : currentMonthIndex();
-  const totalMonths = Math.max(endIndex - toMonthIndex(entry.start), 1);
+  const totalMonths = Math.max(endIndex - toMonthIndex(entry.start) + 1, 1);
   const years = Math.floor(totalMonths / 12);
   const months = totalMonths % 12;
 
