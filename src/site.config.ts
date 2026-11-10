@@ -51,6 +51,7 @@ export const SITE = {
   bookmarks: {
     description: "Links I've saved: CS fundamentals, tools, games, and more.",
     embedUrl: 'https://onurcakmakcs.raindrop.page/embed/me',
+    expandedEmbedHeightPx: 500,
   },
 
   career: [

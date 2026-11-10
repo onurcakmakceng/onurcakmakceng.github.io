@@ -4,7 +4,7 @@ import JapandiArticles from './JapandiArticles';
 import { SITE } from '../../site.config';
 import { GitHubIcon, LinkedInIcon } from '../../components/icons';
 import { formatRange, isCurrentRole, secondaryDetail, type CareerEntry } from '../../lib/career';
-import { bookmarksEmbedUrl } from '../../lib/bookmarks';
+import { BOOKMARKS_EMBED_STYLE, bookmarksEmbedUrl } from '../../lib/bookmarks';
 import { externalLinkAttributes, primaryProjectLink } from '../../lib/projects';
 
 const NAVIGATION = [
@@ -116,6 +116,7 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
       <div class="frame">
         <iframe
           src={bookmarksEmbedUrl('light')}
+          style={BOOKMARKS_EMBED_STYLE}
           title="Bookmarks on Raindrop"
           loading="lazy"
           allowfullscreen></iframe>
@@ -446,6 +447,12 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
     border: 0;
     border-radius: 0.8rem;
     background: #fff;
+  }
+
+  @media (min-width: 1024px) {
+    .frame iframe {
+      height: var(--bookmarks-expanded-height);
+    }
   }
 
   .projects {

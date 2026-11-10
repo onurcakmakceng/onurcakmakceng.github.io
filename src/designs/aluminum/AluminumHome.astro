@@ -3,7 +3,7 @@ import AluminumLayout from './AluminumLayout.astro';
 import AluminumArticles from './AluminumArticles';
 import { SITE } from '../../site.config';
 import { formatRange, isCurrentRole, secondaryDetail, type CareerEntry } from '../../lib/career';
-import { bookmarksEmbedUrl } from '../../lib/bookmarks';
+import { BOOKMARKS_EMBED_STYLE, bookmarksEmbedUrl } from '../../lib/bookmarks';
 import { externalLinkAttributes, primaryProjectLink } from '../../lib/projects';
 
 const NAVIGATION = [
@@ -127,6 +127,7 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
         <div class="tile tile-flush">
           <iframe
             src={bookmarksEmbedUrl('light')}
+            style={BOOKMARKS_EMBED_STYLE}
             title="Bookmarks on Raindrop"
             loading="lazy"
             allowfullscreen></iframe>
@@ -474,6 +475,12 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
     width: 100%;
     height: 460px;
     border: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .tile-flush iframe {
+      height: var(--bookmarks-expanded-height);
+    }
   }
 
   .projects {
