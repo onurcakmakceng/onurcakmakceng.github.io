@@ -1,0 +1,595 @@
+---
+import AluminumLayout from './AluminumLayout.astro';
+import AluminumArticles from './AluminumArticles';
+import { SITE } from '../../site.config';
+import { formatRange, isCurrentRole, secondaryDetail, type CareerEntry } from '../../lib/career';
+import { bookmarksEmbedUrl } from '../../lib/bookmarks';
+import { externalLinkAttributes, primaryProjectLink } from '../../lib/projects';
+
+const NAVIGATION = [
+  { href: '#experience', label: 'Experience' },
+  { href: '#bookmarks', label: 'Bookmarks' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#articles', label: 'Articles' },
+];
+
+const careerEntries: readonly CareerEntry[] = SITE.career;
+---
+
+<AluminumLayout>
+  <slot name="overlay" slot="overlay" />
+
+  <header class="globalnav">
+    <div class="globalnav-inner">
+      <a href="#top" class="wordmark" data-design-unlock>{SITE.name}</a>
+      <nav aria-label="Sections">
+        <ul>
+          {
+            NAVIGATION.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <img src={SITE.avatarUrl} alt={SITE.author.name} width="128" height="128" class="avatar" />
+      <h1>{SITE.author.name}</h1>
+      <p class="hero-summary">{SITE.author.summary}</p>
+      <div class="cta-row">
+        <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" class="button">
+          LinkedIn
+        </a>
+        <a href={SITE.social.github} target="_blank" rel="noopener noreferrer" class="chevron-link">
+          GitHub
+        </a>
+      </div>
+    </section>
+
+    <section id="experience" class="band band-alt">
+      <div class="container">
+        <header class="band-header">
+          <h2>Experience</h2>
+          <p>{SITE.careerSummary}</p>
+          <a
+            href={SITE.social.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="chevron-link"
+          >
+            Full profile on LinkedIn
+          </a>
+        </header>
+        <ol class="tile career">
+          {
+            careerEntries.map((entry) => (
+              <li class="career-entry">
+                <div class="career-main">
+                  <h3>{entry.title}</h3>
+                  <p class="career-org">
+                    {entry.organizationUrl ? (
+                      <a href={entry.organizationUrl} target="_blank" rel="noopener noreferrer">
+                        {entry.organization}
+                      </a>
+                    ) : (
+                      <span>{entry.organization}</span>
+                    )}
+                    {entry.currentOrganization && (
+                      <a
+                        href={entry.currentOrganization.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        ({entry.currentOrganization.name})
+                      </a>
+                    )}
+                  </p>
+                  <p class="career-location">{entry.location}</p>
+                </div>
+                <div class="career-side">
+                  <p class="career-dates">
+                    {isCurrentRole(entry) && <span class="now">Now</span>}
+                    {formatRange(entry)}
+                  </p>
+                  <p class="career-detail">{secondaryDetail(entry)}</p>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+
+    <section id="bookmarks" class="band">
+      <div class="container">
+        <header class="band-header">
+          <h2>Bookmarks</h2>
+          <p>{SITE.bookmarks.description}</p>
+          <a
+            href={SITE.social.raindrop}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="chevron-link"
+          >
+            Show all
+          </a>
+        </header>
+        <div class="tile tile-flush">
+          <iframe
+            src={bookmarksEmbedUrl('light')}
+            title="Bookmarks on Raindrop"
+            loading="lazy"
+            allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="band band-alt">
+      <div class="container">
+        <header class="band-header">
+          <h2>Open Source & Side Projects</h2>
+        </header>
+        <div class="projects">
+          {
+            SITE.projects.map((project) => {
+              const primaryLink = primaryProjectLink(project);
+              return (
+                <article class="tile project">
+                  <div class="project-mark">
+                    {'logoUrl' in project ? (
+                      <img src={project.logoUrl} alt="" width="72" height="72" loading="lazy" />
+                    ) : (
+                      <span aria-hidden="true">{project.icon}</span>
+                    )}
+                  </div>
+                  <h3>{project.name}</h3>
+                  <p class="project-description">{project.description}</p>
+                  <p class="project-tags">{project.tags.join(' · ')}</p>
+                  <div class="project-links">
+                    <a
+                      href={primaryLink.href}
+                      {...externalLinkAttributes(primaryLink)}
+                      class="chevron-link"
+                    >
+                      Learn more
+                    </a>
+                    <a
+                      href={project.repoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="chevron-link"
+                    >
+                      View source
+                    </a>
+                  </div>
+                </article>
+              );
+            })
+          }
+        </div>
+      </div>
+    </section>
+
+    <section id="articles" class="band">
+      <div class="container">
+        <header class="band-header">
+          <h2>Articles</h2>
+          <a
+            href={SITE.social.medium}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="chevron-link"
+          >
+            Read all on Medium
+          </a>
+        </header>
+        <AluminumArticles client:load />
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <p>{SITE.author.copyright}</p>
+      <ul>
+        <li>
+          <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        </li>
+        <li><a href={SITE.social.github} target="_blank" rel="noopener noreferrer">GitHub</a></li>
+        <li><a href={SITE.social.medium} target="_blank" rel="noopener noreferrer">Medium</a></li>
+      </ul>
+    </div>
+  </footer>
+</AluminumLayout>
+
+<style>
+  .container {
+    width: min(980px, 100% - 2.75rem);
+    margin-inline: auto;
+  }
+
+  .globalnav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: rgb(251 251 253 / 0.8);
+    border-bottom: 1px solid rgb(0 0 0 / 0.08);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    backdrop-filter: saturate(180%) blur(20px);
+  }
+
+  .globalnav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: min(980px, 100% - 2.75rem);
+    height: 3rem;
+    margin-inline: auto;
+    font-size: 0.78rem;
+  }
+
+  .wordmark {
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .globalnav ul {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .globalnav nav a {
+    color: rgb(29 29 31 / 0.8);
+    transition: color 0.2s;
+  }
+
+  .globalnav nav a:hover {
+    color: var(--ink);
+  }
+
+  .hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 6rem 1.5rem 7rem;
+    text-align: center;
+  }
+
+  .avatar {
+    width: 8rem;
+    height: 8rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 2rem;
+  }
+
+  .eyebrow {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 0.5rem;
+  }
+
+  h1 {
+    font-size: clamp(3rem, 9vw, 5.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.035em;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-summary {
+    max-width: 42rem;
+    font-size: clamp(1.1rem, 2vw, 1.35rem);
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-bottom: 2.25rem;
+  }
+
+  .cta-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem 2rem;
+  }
+
+  .button {
+    padding: 0.75rem 1.4rem;
+    border-radius: 999px;
+    background: var(--link);
+    color: #fff;
+    font-size: 1.05rem;
+    transition: background-color 0.2s;
+  }
+
+  .button:hover {
+    background: var(--link-hover);
+  }
+
+  .chevron-link {
+    color: var(--link);
+    font-size: 1.05rem;
+    white-space: nowrap;
+  }
+
+  .chevron-link::after {
+    content: ' ›';
+    display: inline-block;
+    margin-left: 0.15em;
+    transition: transform 0.2s;
+  }
+
+  .chevron-link:hover {
+    text-decoration: underline;
+  }
+
+  .chevron-link:hover::after {
+    transform: translateX(2px);
+  }
+
+  .band {
+    padding-block: 6.5rem;
+    background: var(--canvas);
+  }
+
+  .band-alt {
+    background: var(--canvas-alt);
+  }
+
+  .band-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    max-width: 44rem;
+    margin: 0 auto 3.5rem;
+    text-align: center;
+  }
+
+  h2 {
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+  }
+
+  .band-header p {
+    font-size: 1.2rem;
+    color: var(--ink-soft);
+  }
+
+  .tile {
+    border-radius: 1.75rem;
+    background: var(--tile);
+  }
+
+  .band-alt .tile {
+    box-shadow: 0 4px 24px rgb(0 0 0 / 0.04);
+  }
+
+  .career {
+    list-style: none;
+    padding: 0.75rem 2.25rem;
+  }
+
+  .career-entry {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    padding-block: 1.5rem;
+    border-bottom: 1px solid var(--hairline);
+  }
+
+  .career-entry:last-child {
+    border-bottom: 0;
+  }
+
+  .career-main h3 {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
+  .career-org {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.3rem;
+    font-size: 1.02rem;
+    color: var(--ink);
+  }
+
+  .career-org a {
+    color: var(--link);
+  }
+
+  .career-org a:hover {
+    text-decoration: underline;
+  }
+
+  .career-location,
+  .career-detail {
+    font-size: 0.88rem;
+    color: var(--ink-faint);
+    margin-top: 0.2rem;
+  }
+
+  .career-side {
+    flex-shrink: 0;
+    text-align: right;
+  }
+
+  .career-dates {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    font-size: 0.95rem;
+    color: var(--ink-soft);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .now {
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: #e8f2fc;
+    color: var(--link);
+    font-size: 0.72rem;
+    font-weight: 600;
+  }
+
+  .tile-flush {
+    overflow: hidden;
+  }
+
+  .tile-flush iframe {
+    display: block;
+    width: 100%;
+    height: 460px;
+    border: 0;
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr));
+    gap: 1.25rem;
+  }
+
+  .project {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 3.5rem 2.5rem 3rem;
+    text-align: center;
+    transition: transform 0.35s cubic-bezier(0.25, 0.1, 0.25, 1);
+  }
+
+  .project:hover {
+    transform: scale(1.015);
+  }
+
+  .project-mark {
+    display: grid;
+    place-items: center;
+    width: 4.5rem;
+    height: 4.5rem;
+    margin-bottom: 1.75rem;
+    border-radius: 1.1rem;
+    overflow: hidden;
+    background: var(--canvas-alt);
+    font-size: 2.25rem;
+  }
+
+  .project-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project h3 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+    line-height: 1.1;
+    margin-bottom: 0.9rem;
+  }
+
+  .project-description {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    margin-bottom: 0.9rem;
+  }
+
+  .project-tags {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    margin-bottom: 1.75rem;
+  }
+
+  .project-links {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem 1.75rem;
+    margin-top: auto;
+  }
+
+  .footer {
+    background: var(--canvas-alt);
+    border-top: 1px solid var(--hairline);
+    font-size: 0.78rem;
+    color: var(--ink-faint);
+  }
+
+  .footer-inner {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.75rem;
+    padding-block: 1.5rem 5rem;
+  }
+
+  .footer ul {
+    display: flex;
+    gap: 1.25rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .footer a:hover {
+    color: var(--ink);
+    text-decoration: underline;
+  }
+
+  @media (max-width: 734px) {
+    .globalnav nav {
+      display: none;
+    }
+
+    .hero {
+      padding-block: 4rem 5rem;
+    }
+
+    .band {
+      padding-block: 4.5rem;
+    }
+
+    .career {
+      padding: 0.5rem 1.25rem;
+    }
+
+    .career-entry {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+
+    .career-side {
+      text-align: left;
+    }
+
+    .career-dates {
+      justify-content: flex-start;
+    }
+
+    .project {
+      padding: 2.75rem 1.5rem 2.25rem;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .project {
+      transition: none;
+    }
+
+    .project:hover {
+      transform: none;
+    }
+  }
+</style>

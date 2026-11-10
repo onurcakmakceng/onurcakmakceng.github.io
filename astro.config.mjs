@@ -3,6 +3,7 @@ import { defineConfig } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 
 import react from '@astrojs/react';
+import designRoutes from './src/designs/integration.ts';
 
 export default defineConfig({
   site: 'https://onurcakmakceng.github.io',
@@ -11,5 +12,5 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react()],
+  integrations: [react(), designRoutes()],
 });

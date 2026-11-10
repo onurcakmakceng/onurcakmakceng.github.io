@@ -1,13 +1,14 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import { SITE } from '../site.config';
-import SectionHeader from '../components/SectionHeader';
-import ProjectCard from '../components/ProjectCard';
-import MediumPosts from '../components/MediumPosts';
-import CareerTimeline from '../components/CareerTimeline';
-import SiteMenu from '../components/SiteMenu';
-import RevealAfterScroll from '../components/RevealAfterScroll';
-import { GitHubIcon, LinkedInIcon } from '../components/icons';
+import Layout from '../../layouts/Layout.astro';
+import { SITE } from '../../site.config';
+import SectionHeader from './components/SectionHeader';
+import ProjectCard from './components/ProjectCard';
+import MediumPosts from './components/MediumPosts';
+import CareerTimeline from './components/CareerTimeline';
+import SiteMenu from './components/SiteMenu';
+import RevealAfterScroll from './components/RevealAfterScroll';
+import { ExternalLinkIcon, GitHubIcon, LinkedInIcon } from '../../components/icons';
+import { bookmarksEmbedUrl } from '../../lib/bookmarks';
 
 const MENU_LINKS = [
   { href: '#experience', label: 'Experience' },
@@ -17,13 +18,16 @@ const MENU_LINKS = [
 ] as const;
 ---
 
-<Layout title={SITE.title} description={SITE.description}>
+<Layout title={SITE.title} description={SITE.description} canonicalPath="/">
+  <slot name="overlay" slot="overlay" />
   <div id="top" class="max-w-[1100px] mx-auto px-6 relative z-10">
     <nav
       class="sticky top-0 z-50 -mx-6 px-6 py-4 flex items-center justify-between bg-[#18181c]/80 backdrop-blur-md"
     >
       <RevealAfterScroll client:load targetId="hero-social-links">
-        <a href="#top" class="gradient-text text-xl font-bold tracking-tight">{SITE.name}</a>
+        <a href="#top" class="gradient-text text-xl font-bold tracking-tight" data-design-unlock>
+          {SITE.name}
+        </a>
       </RevealAfterScroll>
       <div class="ml-auto flex items-center gap-1">
         <RevealAfterScroll
@@ -65,14 +69,9 @@ const MENU_LINKS = [
         />
         <div>
           <h1 class="text-[clamp(2.2rem,5vw,3.4rem)] font-bold leading-[1.1] mb-4">
-            <span class="gradient-text">{SITE.author.name}</span>
+            <span class="gradient-text" data-design-unlock>{SITE.author.name}</span>
           </h1>
-          <p class="text-lg text-slate-400 leading-relaxed mb-6">
-            Senior Software Engineer with 8+ years of experience, specializing in Back-End
-            technologies. Expertise in Java, Python, C#, Cloud Technologies alongside hands-on
-            experience in React and Unity. Focused on delivering quality and the best products for
-            people. Motivated by seeing users.
-          </p>
+          <p class="text-lg text-slate-400 leading-relaxed mb-6">{SITE.author.summary}</p>
           <div id="hero-social-links" class="flex gap-3 flex-wrap">
             <a
               href={SITE.social.linkedin}
@@ -103,7 +102,7 @@ const MENU_LINKS = [
         linkHref={SITE.social.linkedin}
         linkText="Full profile"
         linkIcon={LinkedInIcon}
-        description="8+ years building software across defense, gaming, e-commerce, and AI, from early-stage startups to scale-ups, unicorns, and decacorns."
+        description={SITE.careerSummary}
       />
       <CareerTimeline entries={SITE.career} />
     </section>
@@ -111,7 +110,10 @@ const MENU_LINKS = [
     <section class="py-14 border-t border-[#2e2e3a]" id="bookmarks">
       <SectionHeader
         title="Bookmarks"
-        description="Links I've saved: CS fundamentals, tools, games, and more."
+        linkHref={SITE.social.raindrop}
+        linkText="Show all"
+        linkIcon={ExternalLinkIcon}
+        description={SITE.bookmarks.description}
       />
       <div class="rounded-2xl overflow-hidden border border-[#2e2e3a] bg-[#202027]">
         <iframe
@@ -119,7 +121,7 @@ const MENU_LINKS = [
           style="border:0;"
           allowfullscreen
           frameborder="0"
-          src="https://onurcakmakcs.raindrop.page/embed/me"
+          src={bookmarksEmbedUrl('dark')}
           loading="lazy"></iframe>
       </div>
     </section>

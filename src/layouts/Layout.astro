@@ -6,9 +6,17 @@ interface Props {
   title?: string;
   description?: string;
   theme?: 'default' | 'baw';
+  canonicalPath?: string;
 }
 
-const { title = SITE.title, description = SITE.description, theme = 'default' } = Astro.props;
+const {
+  title = SITE.title,
+  description = SITE.description,
+  theme = 'default',
+  canonicalPath = Astro.url.pathname,
+} = Astro.props;
+
+const canonicalUrl = new URL(canonicalPath, SITE.url).href;
 
 const isBaw = theme === 'baw';
 
@@ -42,6 +50,7 @@ const palette = isBaw
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <link rel="icon" type="image/png" href={SITE.avatarUrl} />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -141,5 +150,6 @@ const palette = isBaw
     <div class="noise fixed inset-0 pointer-events-none opacity-[0.03] z-[1000]"></div>
     <div class="ambient-glow fixed inset-0 pointer-events-none"></div>
     <slot />
+    <slot name="overlay" />
   </body>
 </html>

@@ -1,0 +1,208 @@
+---
+import {
+  IS_DESIGN_SWITCHER_ENABLED,
+  PUBLISHED_DESIGNS,
+  designPath,
+  findDesignByPath,
+} from './registry';
+
+const current = findDesignByPath(Astro.url.pathname);
+---
+
+{
+  IS_DESIGN_SWITCHER_ENABLED && (
+    <nav class="design-switcher" aria-label="Design alternatives" data-design-switcher hidden>
+      <span class="caption">Design</span>
+      <ul>
+        {PUBLISHED_DESIGNS.map((design) => (
+          <li>
+            <a
+              href={designPath(design)}
+              aria-current={design === current ? 'page' : undefined}
+              title={design.label}
+              style={{ '--swatch-ground': design.swatch[0], '--swatch-accent': design.swatch[1] }}
+            >
+              <span class="swatch" aria-hidden="true" />
+              <span class="label">{design.label}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
+      <button
+        type="button"
+        class="close"
+        aria-label="Hide design switcher"
+        data-design-switcher-close
+      >
+        ×
+      </button>
+    </nav>
+  )
+}
+
+<script>
+  const UNLOCK_CLICK_COUNT = 5;
+  const MAX_CLICK_INTERVAL_MS = 800;
+  const STORAGE_KEY = 'design-switcher-unlocked';
+
+  function readUnlocked(): boolean {
+    try {
+      return localStorage.getItem(STORAGE_KEY) === 'true';
+    } catch {
+      return false;
+    }
+  }
+
+  function writeUnlocked(isUnlocked: boolean) {
+    try {
+      if (isUnlocked) localStorage.setItem(STORAGE_KEY, 'true');
+      else localStorage.removeItem(STORAGE_KEY);
+    } catch {
+      return;
+    }
+  }
+
+  const switcher = document.querySelector<HTMLElement>('[data-design-switcher]');
+
+  if (switcher) {
+    const setUnlocked = (isUnlocked: boolean) => {
+      switcher.hidden = !isUnlocked;
+      writeUnlocked(isUnlocked);
+    };
+
+    switcher.hidden = !readUnlocked();
+
+    let clickCount = 0;
+    let lastClickAt = 0;
+
+    document.querySelectorAll('[data-design-unlock]').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const now = performance.now();
+        clickCount = now - lastClickAt <= MAX_CLICK_INTERVAL_MS ? clickCount + 1 : 1;
+        lastClickAt = now;
+        if (clickCount >= UNLOCK_CLICK_COUNT) {
+          clickCount = 0;
+          setUnlocked(true);
+        }
+      });
+    });
+
+    switcher
+      .querySelector('[data-design-switcher-close]')
+      ?.addEventListener('click', () => setUnlocked(false));
+
+    switcher.querySelectorAll<HTMLAnchorElement>('a').forEach((link) => {
+      link.addEventListener('click', () => {
+        link.hash = window.location.hash;
+      });
+    });
+  }
+</script>
+
+<style is:global>
+  @media (prefers-reduced-motion: no-preference) {
+    @view-transition {
+      navigation: auto;
+    }
+  }
+</style>
+
+<style>
+  .design-switcher {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.4rem 0.35rem 0.9rem;
+    border: 1px solid rgb(255 255 255 / 0.08);
+    border-radius: 999px;
+    background: rgb(28 26 24 / 0.88);
+    box-shadow: 0 6px 24px rgb(0 0 0 / 0.18);
+    color: #f1ede6;
+    font:
+      500 12px/1 system-ui,
+      -apple-system,
+      sans-serif;
+    view-transition-name: design-switcher;
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+  }
+
+  .design-switcher[hidden] {
+    display: none;
+  }
+
+  .caption {
+    color: rgb(241 237 230 / 0.55);
+    letter-spacing: 0.04em;
+  }
+
+  ul {
+    display: flex;
+    gap: 0.15rem;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    padding: 0.4rem 0.65rem;
+    border-radius: 999px;
+    color: inherit;
+    text-decoration: none;
+    transition: background-color 0.2s;
+  }
+
+  a:hover,
+  .close:hover {
+    background: rgb(255 255 255 / 0.08);
+  }
+
+  a[aria-current='page'] {
+    background: rgb(255 255 255 / 0.14);
+  }
+
+  .swatch {
+    width: 0.8rem;
+    height: 0.8rem;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--swatch-ground) 50%, var(--swatch-accent) 50%);
+    box-shadow: 0 0 0 1px rgb(255 255 255 / 0.25);
+  }
+
+  .close {
+    display: grid;
+    place-items: center;
+    width: 1.6rem;
+    height: 1.6rem;
+    padding: 0;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: rgb(241 237 230 / 0.6);
+    font: inherit;
+    font-size: 15px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  @media (max-width: 640px) {
+    .caption,
+    a:not([aria-current='page']) .label {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a,
+    .close {
+      transition: none;
+    }
+  }
+</style>

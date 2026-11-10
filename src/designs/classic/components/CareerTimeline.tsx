@@ -1,60 +1,4 @@
-interface OrganizationLink {
-  name: string;
-  url: string;
-}
-
-interface CareerEntry {
-  type: 'work' | 'education';
-  title: string;
-  organization: string;
-  organizationUrl?: string;
-  currentOrganization?: OrganizationLink;
-  location?: string;
-  note?: string;
-  start: string;
-  end?: string | null;
-  description?: string;
-}
-
-function formatRange(start: string, end?: string | null) {
-  return end ? `${start} – ${end}` : `${start} – Present`;
-}
-
-function durationLabel(start: string, end?: string | null) {
-  const parse = (value: string) => {
-    const parts = value.split(' ');
-    if (parts.length === 1) return Number(parts[0]) * 12;
-    const [month, year] = parts;
-    const months = [
-      'Jan',
-      'Feb',
-      'Mar',
-      'Apr',
-      'May',
-      'Jun',
-      'Jul',
-      'Aug',
-      'Sep',
-      'Oct',
-      'Nov',
-      'Dec',
-    ];
-    return Number(year) * 12 + months.indexOf(month);
-  };
-
-  const now = new Date();
-  const currentLabel = `${['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][now.getMonth()]} ${now.getFullYear()}`;
-
-  const startIndex = parse(start);
-  const endIndex = end ? parse(end) : parse(currentLabel);
-  const totalMonths = Math.max(endIndex - startIndex, 1);
-  const years = Math.floor(totalMonths / 12);
-  const months = totalMonths % 12;
-
-  if (years && months) return `${years} yr ${months} mo`;
-  if (years) return `${years} yr${years > 1 ? 's' : ''}`;
-  return `${months} mo${months > 1 ? 's' : ''}`;
-}
+import { formatRange, isCurrentRole, secondaryDetail, type CareerEntry } from '../../../lib/career';
 
 export default function CareerTimeline({ entries }: { entries: readonly CareerEntry[] }) {
   return (
@@ -63,7 +7,7 @@ export default function CareerTimeline({ entries }: { entries: readonly CareerEn
 
       <ol className="list-none m-0 p-0 space-y-0">
         {entries.map((entry) => {
-          const isCurrent = entry.type === 'work' && !entry.end;
+          const isCurrent = isCurrentRole(entry);
 
           return (
             <li key={`${entry.organization}-${entry.start}`} className="relative pl-8 py-3">
@@ -107,14 +51,14 @@ export default function CareerTimeline({ entries }: { entries: readonly CareerEn
                   )}
                 </div>
                 <span className="shrink-0 font-mono text-xs text-slate-500 whitespace-nowrap mt-0.5 sm:mt-0">
-                  {formatRange(entry.start, entry.end)}
+                  {formatRange(entry)}
                 </span>
               </div>
 
               <div className="flex items-baseline justify-between gap-4 mt-0.5">
                 <span className="text-xs text-slate-600">{entry.location}</span>
                 <span className="shrink-0 font-mono text-[0.65rem] text-slate-600 whitespace-nowrap">
-                  {entry.type === 'work' ? durationLabel(entry.start, entry.end) : entry.note}
+                  {secondaryDetail(entry)}
                 </span>
               </div>
             </li>

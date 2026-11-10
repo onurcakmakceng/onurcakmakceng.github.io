@@ -1,0 +1,583 @@
+---
+import JapandiLayout from './JapandiLayout.astro';
+import JapandiArticles from './JapandiArticles';
+import { SITE } from '../../site.config';
+import { GitHubIcon, LinkedInIcon } from '../../components/icons';
+import { formatRange, isCurrentRole, secondaryDetail, type CareerEntry } from '../../lib/career';
+import { bookmarksEmbedUrl } from '../../lib/bookmarks';
+import { externalLinkAttributes, primaryProjectLink } from '../../lib/projects';
+
+const NAVIGATION = [
+  { href: '#experience', label: 'Experience' },
+  { href: '#bookmarks', label: 'Bookmarks' },
+  { href: '#projects', label: 'Projects' },
+  { href: '#articles', label: 'Articles' },
+];
+
+const careerEntries: readonly CareerEntry[] = SITE.career;
+---
+
+<JapandiLayout>
+  <slot name="overlay" slot="overlay" />
+
+  <header class="topbar">
+    <div class="container topbar-inner">
+      <a href="#top" class="wordmark" data-design-unlock>{SITE.name}</a>
+      <nav aria-label="Sections">
+        <ul class="nav-list">
+          {
+            NAVIGATION.map((item) => (
+              <li>
+                <a href={item.href}>{item.label}</a>
+              </li>
+            ))
+          }
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top" class="container">
+    <section class="hero">
+      <div class="hero-text">
+        <p class="eyebrow">{SITE.author.headline}</p>
+        <h1>{SITE.author.name}</h1>
+        <p class="summary">{SITE.author.summary}</p>
+        <div class="hero-links">
+          <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" class="pill">
+            <LinkedInIcon size={15} />
+            LinkedIn
+          </a>
+          <a href={SITE.social.github} target="_blank" rel="noopener noreferrer" class="pill">
+            <GitHubIcon size={15} />
+            GitHub
+          </a>
+        </div>
+      </div>
+      <figure class="portrait">
+        <span class="sun" aria-hidden="true"></span>
+        <img src={SITE.avatarUrl} alt={SITE.author.name} width="240" height="300" />
+      </figure>
+    </section>
+
+    <section id="experience" class="section">
+      <header class="section-header">
+        <h2>Experience</h2>
+        <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" class="quiet-link">
+          <LinkedInIcon size={13} />
+          Full profile
+        </a>
+      </header>
+      <p class="section-intro">{SITE.careerSummary}</p>
+      <ol class="career">
+        {
+          careerEntries.map((entry) => (
+            <li class:list={['career-entry', { 'is-current': isCurrentRole(entry) }]}>
+              <span class="career-dates">{formatRange(entry)}</span>
+              <div class="career-body">
+                <h3>{entry.title}</h3>
+                <p class="career-org">
+                  {entry.organizationUrl ? (
+                    <a href={entry.organizationUrl} target="_blank" rel="noopener noreferrer">
+                      {entry.organization}
+                    </a>
+                  ) : (
+                    <span>{entry.organization}</span>
+                  )}
+                  {entry.currentOrganization && (
+                    <a
+                      href={entry.currentOrganization.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      ({entry.currentOrganization.name})
+                    </a>
+                  )}
+                </p>
+                <p class="career-meta">
+                  <span>{entry.location}</span>
+                  <span>{secondaryDetail(entry)}</span>
+                </p>
+              </div>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <section id="bookmarks" class="section">
+      <header class="section-header">
+        <h2>Bookmarks</h2>
+        <a href={SITE.social.raindrop} target="_blank" rel="noopener noreferrer" class="quiet-link">
+          Show all →
+        </a>
+      </header>
+      <p class="section-intro">{SITE.bookmarks.description}</p>
+      <div class="frame">
+        <iframe
+          src={bookmarksEmbedUrl('light')}
+          title="Bookmarks on Raindrop"
+          loading="lazy"
+          allowfullscreen></iframe>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <header class="section-header">
+        <h2>Open Source & Side Projects</h2>
+      </header>
+      <div class="projects">
+        {
+          SITE.projects.map((project) => {
+            const primaryLink = primaryProjectLink(project);
+            return (
+              <article class="project">
+                <div class="project-mark">
+                  {'logoUrl' in project ? (
+                    <img src={project.logoUrl} alt="" width="44" height="44" loading="lazy" />
+                  ) : (
+                    <span aria-hidden="true">{project.icon}</span>
+                  )}
+                </div>
+                <h3>
+                  <a
+                    href={primaryLink.href}
+                    {...externalLinkAttributes(primaryLink)}
+                    class="stretched"
+                  >
+                    {project.name}
+                  </a>
+                </h3>
+                <p class="project-description">{project.description}</p>
+                <p class="project-tags">{project.tags.join(' · ')}</p>
+                <div class="project-links">
+                  <span>{primaryLink.label} →</span>
+                  <a
+                    href={project.repoUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="raised"
+                  >
+                    Source
+                  </a>
+                </div>
+              </article>
+            );
+          })
+        }
+      </div>
+    </section>
+
+    <section id="articles" class="section">
+      <header class="section-header">
+        <h2>Articles</h2>
+        <a href={SITE.social.medium} target="_blank" rel="noopener noreferrer" class="quiet-link">
+          All on Medium →
+        </a>
+      </header>
+      <JapandiArticles client:load />
+    </section>
+  </main>
+
+  <footer class="container footer">
+    <p>{SITE.author.copyright}</p>
+    <div class="footer-links">
+      <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer">LinkedIn</a>
+      <a href={SITE.social.github} target="_blank" rel="noopener noreferrer">GitHub</a>
+      <a href={SITE.social.medium} target="_blank" rel="noopener noreferrer">Medium</a>
+    </div>
+  </footer>
+</JapandiLayout>
+
+<style>
+  .container {
+    width: min(1040px, 100% - 3rem);
+    margin-inline: auto;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 92%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .topbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 4.25rem;
+  }
+
+  .wordmark {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-list {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    padding: 0;
+    font-size: 0.875rem;
+    color: var(--ink-soft);
+  }
+
+  .nav-list a {
+    transition: color 0.2s;
+  }
+
+  .nav-list a:hover {
+    color: var(--sage-deep);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: center;
+    padding-block: 6rem 5rem;
+  }
+
+  .eyebrow {
+    font-size: 0.8rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage-deep);
+    margin-bottom: 1.25rem;
+  }
+
+  h1 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(2.6rem, 6vw, 4.2rem);
+    line-height: 1.1;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.75rem;
+  }
+
+  .summary {
+    font-size: 1.05rem;
+    color: var(--ink-soft);
+    max-width: 34rem;
+    margin-bottom: 2.25rem;
+  }
+
+  .hero-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1.2rem;
+    border: 1px solid var(--oak-light);
+    border-radius: 999px;
+    font-size: 0.875rem;
+    background: var(--paper-raised);
+    transition:
+      border-color 0.2s,
+      background-color 0.2s;
+  }
+
+  .pill:hover {
+    border-color: var(--oak);
+    background: #fff;
+  }
+
+  .portrait {
+    position: relative;
+    justify-self: center;
+    width: min(240px, 100%);
+  }
+
+  .sun {
+    position: absolute;
+    inset: auto -2.5rem -1.5rem auto;
+    width: 13rem;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: var(--sage-mist);
+  }
+
+  .portrait img {
+    position: relative;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    border-radius: 999px 999px 1.25rem 1.25rem;
+    border: 6px solid var(--paper-raised);
+    outline: 1px solid var(--oak-light);
+  }
+
+  .section {
+    padding-block: 4.5rem;
+    border-top: 1px solid var(--line);
+  }
+
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-bottom: 0.75rem;
+  }
+
+  h2 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(1.6rem, 3vw, 2rem);
+    letter-spacing: 0.01em;
+  }
+
+  h2::after {
+    content: '';
+    display: block;
+    width: 2.5rem;
+    height: 2px;
+    margin-top: 0.75rem;
+    background: var(--oak);
+    border-radius: 2px;
+  }
+
+  .section-intro {
+    color: var(--ink-soft);
+    max-width: 36rem;
+    margin-block: 1rem 2.5rem;
+  }
+
+  .quiet-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.875rem;
+    color: var(--ink-faint);
+    transition: color 0.2s;
+  }
+
+  .quiet-link:hover {
+    color: var(--sage-deep);
+  }
+
+  .career {
+    list-style: none;
+    padding: 0;
+  }
+
+  .career-entry {
+    display: grid;
+    grid-template-columns: 10.5rem minmax(0, 1fr);
+    gap: 2rem;
+    padding-block: 1.4rem;
+    border-bottom: 1px dashed var(--line);
+  }
+
+  .career-entry:last-child {
+    border-bottom: 0;
+  }
+
+  .career-dates {
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 0.2rem;
+  }
+
+  .is-current .career-dates {
+    color: var(--sage-deep);
+  }
+
+  .is-current .career-dates::before {
+    content: '';
+    display: inline-block;
+    width: 0.45rem;
+    height: 0.45rem;
+    margin-right: 0.5rem;
+    border-radius: 50%;
+    background: var(--sage);
+    vertical-align: middle;
+  }
+
+  .career-body h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.15rem;
+    line-height: 1.4;
+  }
+
+  .career-org {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    color: var(--sage-deep);
+  }
+
+  .career-org a:hover {
+    color: var(--walnut);
+  }
+
+  .career-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    margin-top: 0.15rem;
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+
+  .frame {
+    padding: 0.6rem;
+    border-radius: 1.25rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--oak-light);
+  }
+
+  .frame iframe {
+    display: block;
+    width: 100%;
+    height: 420px;
+    border: 0;
+    border-radius: 0.8rem;
+    background: #fff;
+  }
+
+  .projects {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr));
+    gap: 1.25rem;
+    margin-top: 2rem;
+  }
+
+  .project {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    padding: 1.75rem;
+    border-radius: 1.25rem;
+    background: var(--paper-raised);
+    border: 1px solid var(--line);
+    transition: border-color 0.25s;
+  }
+
+  .project:hover {
+    border-color: var(--oak);
+  }
+
+  .project-mark {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-bottom: 1.25rem;
+    border-radius: 50%;
+    overflow: hidden;
+    background: var(--oak-light);
+    font-size: 1.3rem;
+  }
+
+  .project-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .project h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .stretched::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .project-description {
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+  }
+
+  .project-tags {
+    font-size: 0.8rem;
+    color: var(--ink-faint);
+    margin-bottom: 1.5rem;
+  }
+
+  .project-links {
+    display: flex;
+    gap: 1.25rem;
+    margin-top: auto;
+    font-size: 0.875rem;
+    color: var(--sage-deep);
+  }
+
+  .raised {
+    position: relative;
+    z-index: 1;
+    color: var(--ink-faint);
+    transition: color 0.2s;
+  }
+
+  .raised:hover {
+    color: var(--walnut);
+  }
+
+  .footer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 2.5rem 5rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.85rem;
+    color: var(--ink-faint);
+  }
+
+  .footer-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .footer-links a:hover {
+    color: var(--sage-deep);
+  }
+
+  @media (max-width: 760px) {
+    .nav-list {
+      display: none;
+    }
+
+    .hero {
+      grid-template-columns: 1fr;
+      gap: 3rem;
+      padding-block: 3.5rem 3rem;
+    }
+
+    .portrait {
+      grid-row: 1;
+      justify-self: start;
+      width: 9rem;
+    }
+
+    .sun {
+      width: 8rem;
+      inset: auto -1.5rem -1rem auto;
+    }
+
+    .career-entry {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+  }
+</style>

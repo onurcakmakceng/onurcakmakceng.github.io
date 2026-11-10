@@ -1,0 +1,22 @@
+---
+import { SITE } from '../../site.config';
+
+interface Props {
+  fontStylesheetUrl: string;
+  themeColor: string;
+}
+
+const { fontStylesheetUrl, themeColor } = Astro.props;
+const canonicalUrl = new URL('/', SITE.url).href;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{SITE.title}</title>
+<meta name="description" content={SITE.description} />
+<meta name="theme-color" content={themeColor} />
+<link rel="canonical" href={canonicalUrl} />
+<link rel="icon" type="image/png" href={SITE.avatarUrl} />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href={fontStylesheetUrl} />

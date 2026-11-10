@@ -37,9 +37,20 @@ export const SITE = {
 
   author: {
     name: 'Onur Cakmak',
+    headline: 'Senior Software Engineer',
+    summary:
+      'Senior Software Engineer with 8+ years of experience, specializing in Back-End technologies. Expertise in Java, Python, C#, Cloud Technologies alongside hands-on experience in React and Unity. Focused on delivering quality and the best products for people. Motivated by seeing users.',
     get copyright() {
       return `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`;
     },
+  },
+
+  careerSummary:
+    '8+ years building software across defense, gaming, e-commerce, and AI, from early-stage startups to scale-ups, unicorns, and decacorns.',
+
+  bookmarks: {
+    description: "Links I've saved: CS fundamentals, tools, games, and more.",
+    embedUrl: 'https://onurcakmakcs.raindrop.page/embed/me',
   },
 
   career: [

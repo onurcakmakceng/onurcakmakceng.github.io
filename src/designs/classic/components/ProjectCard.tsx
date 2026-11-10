@@ -1,39 +1,14 @@
-import { ExternalLinkIcon, GitHubIcon } from './icons';
-
-interface Project {
-  name: string;
-  description: string;
-  icon?: string;
-  logoUrl?: string;
-  tags: readonly string[];
-  repoUrl: string;
-  pageUrl?: string;
-  websiteUrl?: string;
-}
-
-interface PrimaryLink {
-  href: string;
-  label: string;
-  isExternal: boolean;
-}
-
-function resolvePrimaryLink(project: Project): PrimaryLink {
-  if (project.pageUrl) return { href: project.pageUrl, label: 'Project Page', isExternal: false };
-  if (project.websiteUrl) return { href: project.websiteUrl, label: 'Website', isExternal: true };
-  return { href: project.repoUrl, label: 'Repository', isExternal: true };
-}
+import { ExternalLinkIcon, GitHubIcon } from '../../../components/icons';
+import { externalLinkAttributes, primaryProjectLink, type Project } from '../../../lib/projects';
 
 export default function ProjectCard({ project }: { project: Project }) {
-  const primaryLink = resolvePrimaryLink(project);
-  const externalLinkProps = primaryLink.isExternal
-    ? { target: '_blank', rel: 'noopener noreferrer' }
-    : {};
+  const primaryLink = primaryProjectLink(project);
 
   return (
     <article className="card-accent-line bg-[#26262e] border border-[#2e2e3a] rounded-2xl p-6 relative overflow-hidden transition-all duration-300 hover:-translate-y-1 hover:border-[var(--color-accent)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.3)] cursor-pointer">
       <a
         href={primaryLink.href}
-        {...externalLinkProps}
+        {...externalLinkAttributes(primaryLink)}
         className="absolute inset-0 z-0"
         aria-label={`View ${project.name}`}
       />
