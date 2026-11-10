@@ -45,7 +45,12 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
         <a href={SITE.social.linkedin} target="_blank" rel="noopener noreferrer" class="button">
           LinkedIn
         </a>
-        <a href={SITE.social.github} target="_blank" rel="noopener noreferrer" class="chevron-link">
+        <a
+          href={SITE.social.github}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="button button-outline"
+        >
           GitHub
         </a>
       </div>
@@ -154,7 +159,7 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
                     <a
                       href={primaryLink.href}
                       {...externalLinkAttributes(primaryLink)}
-                      class="chevron-link"
+                      class="button card-link"
                     >
                       Learn more
                     </a>
@@ -162,7 +167,7 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
                       href={project.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
-                      class="chevron-link"
+                      class="chevron-link above-card-link"
                     >
                       View source
                     </a>
@@ -298,20 +303,35 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 1rem 2rem;
+    gap: 1rem;
   }
 
   .button {
     padding: 0.75rem 1.4rem;
+    border: 1px solid transparent;
     border-radius: 999px;
     background: var(--link);
     color: #fff;
     font-size: 1.05rem;
-    transition: background-color 0.2s;
+    transition:
+      background-color 0.2s,
+      color 0.2s,
+      border-color 0.2s;
   }
 
   .button:hover {
     background: var(--link-hover);
+  }
+
+  .button-outline {
+    border-color: var(--link);
+    background: transparent;
+    color: var(--link);
+  }
+
+  .button-outline:hover {
+    background: var(--link);
+    color: #fff;
   }
 
   .chevron-link {
@@ -463,6 +483,7 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
   }
 
   .project {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -517,8 +538,24 @@ const careerEntries: readonly CareerEntry[] = SITE.career;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     gap: 0.75rem 1.75rem;
     margin-top: auto;
+  }
+
+  .card-link::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+  }
+
+  .project:hover .card-link {
+    background: var(--link-hover);
+  }
+
+  .above-card-link {
+    position: relative;
+    z-index: 1;
   }
 
   .footer {
