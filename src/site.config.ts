@@ -39,7 +39,7 @@ export const SITE = {
     name: 'Onur Cakmak',
     headline: 'Senior Software Engineer',
     summary:
-      'Senior Software Engineer with 8+ years of experience, specializing in Back-End technologies. Expertise in Java, Python, C#, Cloud Technologies alongside hands-on experience in React and Unity. Focused on delivering quality and the best products for people. Motivated by seeing users.',
+      'Senior Software Engineer with 8+ years of experience, specializing in Back-End technologies. Expertise in Java, Python, C#, Cloud Technologies alongside hands-on experience in React and Unity. Focused on quality, and motivated by building products people actually use.',
     get copyright() {
       return `© ${new Date().getFullYear()} Onur Cakmak. All rights reserved.`;
     },
