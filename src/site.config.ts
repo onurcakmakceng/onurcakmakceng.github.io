@@ -113,7 +113,7 @@ export const SITE = {
     },
     {
       type: 'education',
-      title: 'B.S. Computer Engineering',
+      title: 'Bachelor of Science in Computer Science',
       organization: 'Hacettepe University',
       organizationUrl: 'https://www.linkedin.com/school/hacettepe-university/',
       location: 'Ankara, Turkey',
